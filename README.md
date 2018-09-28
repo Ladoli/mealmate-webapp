@@ -1,1 +1,1 @@
-# meatmate-webapp
+# mealmate-webapp
