@@ -1,0 +1,38 @@
+.restoList{
+  min-height: 50vh !important;
+  min-width: 50vw !important;
+}
+
+
+.flexCenterAll {
+	display: flex  !important;
+	align-items: center  !important;
+	justify-content: center  !important;
+}
+
+.cardTest{
+  min-width: 40vw !important;
+  min-height: 35vh !important;
+}
+
+.cardRight{
+  min-width: 40vw !important;
+  min-height: 35vh !important;
+  animation: slideRight 2s 1 forwards;
+}
+
+.cardLeft{
+  min-width: 40vw !important;
+  min-height: 35vh !important;
+  animation: slideLeft 2s 1 forwards;
+}
+
+@keyframes slideRight {
+			0% {transform: translateX(0px);}
+      100% {transform: translateX(100vw);}
+}
+
+@keyframes slideLeft {
+			0% {transform: translateX(0px);}
+      100% {transform: translateX(-100vw);}
+}
