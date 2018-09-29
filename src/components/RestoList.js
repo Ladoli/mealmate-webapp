@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { map, isEmpty  } from 'lodash';
 import RestoContainer from './RestoContainer';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Icon } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
@@ -100,15 +100,20 @@ class RestoList extends Component {
             {this.renderRestos()}
           </Card.Content>
           <Card.Content>
-            <Button onClick={this.clickNo}>
-              Left
-            </Button>
-            <Button onClick={this.clickYes}>
-              Right
-            </Button>
+            <Button.Group>
+              <Button onClick={this.clickNo}  color='red'>
+                <Icon name='x'/>
+                Left
+              </Button>
+              <Button.Or />
+              <Button onClick={this.clickYes} color='green'>
+                <Icon name='check'/>
+                Right
+              </Button>
+            </Button.Group>
             <br/>
             <div style={{textAlign: "center", paddingTop: "20px"}}>
-              <Button onClick={this.resetRestos}>
+              <Button onClick={this.resetRestos} primary>
                 Reset
               </Button>
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { map, isEmpty  } from 'lodash';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Icon } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import { getRestoData, setRestoData } from "../actions";
 
@@ -41,7 +41,8 @@ class RestoData extends Component {
               {this.props.restoData.desc}
             </Card.Content>
             <Card.Content>
-              <Button onClick={this.swipeLeft}>
+              <Button onClick={this.swipeLeft}  color='red'>
+                <Icon name='chevron circle left'/>
                 Left Swipe
               </Button>
             </Card.Content>
