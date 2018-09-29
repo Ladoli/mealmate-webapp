@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Card, Button, Icon } from 'semantic-ui-react';
+
 import { connect } from "react-redux";
 import { signIn } from "../actions";
 import history from './History';
@@ -14,12 +16,14 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div className="row social-signin-container">
-        <div className="col s10 offset-s1 center-align">
-          <h4 id="sign-in-header">Sign In to start</h4>
-          <a className="social-signin" onClick={this.props.signIn}>
-            <i className="fa fa-google social-signin-icon" />
-            Sign In With Google
+      <div className="row social-signin-container flexCenterAll" style={{minWidth: "100vw", minHeight: "100vh"}}>
+        <div style={{textAlign: "center"}}>
+          <h3>Sign In to start</h3>
+          <a onClick={this.props.signIn}>
+            <Button primary >
+              <Icon name='google' />
+              Sign In With Google
+            </Button>
           </a>
         </div>
       </div>
