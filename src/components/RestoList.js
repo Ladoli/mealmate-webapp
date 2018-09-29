@@ -18,7 +18,18 @@ class RestoList extends Component {
     this.clickYes = this.clickYes.bind(this);
     this.clickNo = this.clickNo.bind(this);
     this.resetRestos = this.resetRestos.bind(this);
-    let restoList = [{name: "KFC", desc: "Finger Lickin Chicken"}, {name: "Spudshack", desc: "Poutine. Nuff said."},{name: "Captain's Boil", desc: "Spicy Seafood"}, {name: "Tanagram Creamery", desc: "Best Icecream"}];
+    let restoList = [{name: "KFC", desc: "Finger Lickin Chicken", images: [
+      "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/93ae44fa-fb79-48f6-b7d4-6c7b3f330b62.png?alt=media"
+    ]},
+    {name: "Spudshack", desc: "Poutine. Nuff said.", images: [
+      "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/spudshack.jpg?alt=media"
+    ]},
+    {name: "Captain's Boil", desc: "Spicy Seafood", images: [
+      "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/cb.jpg?alt=media"
+    ]},
+    {name: "Tangram Creamery", desc: "Best Icecream", images: [
+      "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/tangram.jpeg?alt=media"
+    ]}];
     let resetCount = restoList.length -1;
     this.state = {
       restoList: restoList,
@@ -37,16 +48,16 @@ class RestoList extends Component {
       }else if(key === cR+1){
         if(this.state.lastAction === "right"){
           return (
-            <RestoContainer cardClass="cardRight" name={value.name} key={key} />
+            <RestoContainer cardClass="cardRight"  name={value.name} key={key} />
           )
         }else{
           return (
-            <RestoContainer  cardClass="cardLeft" name={value.name} key={key} />
+            <RestoContainer  cardClass="cardLeft" images={value.images} name={value.name} key={key} />
           )
         }
       }else {
         return (
-          <RestoContainer  cardClass="cardTest" name={value.name} key={key} />
+          <RestoContainer  cardClass="cardTest" images={value.images} name={value.name} key={key} />
         )
       }
     });
