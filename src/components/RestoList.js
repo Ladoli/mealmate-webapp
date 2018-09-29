@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { map, isEmpty  } from 'lodash';
 import RestoContainer from './RestoContainer';
+import RestoData from './RestoData';
 import { Card, Button, Icon } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -58,7 +59,6 @@ class RestoList extends Component {
       )
     }else{
       return (<div>
-        Fuck
       </div>)
     }
   }
@@ -94,32 +94,33 @@ class RestoList extends Component {
 
   render() {
     return (
-      <div className="flexCenterAll" style={{backgroundColor: "red", display: "flex", height: "100%", minHeight: "100vh"}}>
+      <div className="flexCenterAll restoBackground" style={{
+        display: "flex", height: "100%", minHeight: "100vh", overflow: "hidden"}}>
         <Card className="flexCenterAll restoDisplay">
           <Card.Content>
             {this.renderRestos()}
           </Card.Content>
-          <Card.Content>
-            <Button.Group>
-              <Button onClick={this.clickNo}  color='red'>
-                <Icon name='x'/>
-                Left
+          <Card.Content style={{width: "100%", textAlign: "center"}}>
+            {/* <Button.Group> */}
+              <Button onClick={this.clickNo}  className="circleButton" >
+                <Icon name='x' color='red'/>
               </Button>
-              <Button.Or />
-              <Button onClick={this.clickYes} color='green'>
-                <Icon name='check'/>
-                Right
+              {/* <Button.Or /> */}
+              <Button onClick={this.clickYes} className="circleButton" >
+                <Icon name='check' color='green'/>
               </Button>
-            </Button.Group>
+            {/* </Button.Group> */}
             <br/>
             <div style={{textAlign: "center", paddingTop: "20px"}}>
               <Button onClick={this.resetRestos} primary>
+                <Icon name='redo' />
                 Reset
               </Button>
             </div>
 
           </Card.Content>
         </Card>
+        <RestoData/>
       </div>
     );
   }

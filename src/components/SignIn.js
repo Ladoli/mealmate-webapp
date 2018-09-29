@@ -17,6 +17,7 @@ class SignIn extends Component {
   render() {
     return (
       <div className="row social-signin-container flexCenterAll" style={{minWidth: "100vw", minHeight: "100vh"}}>
+        <Card>
         <div style={{textAlign: "center"}}>
           <h3>Sign In to start</h3>
           <a onClick={this.props.signIn}>
@@ -26,7 +27,8 @@ class SignIn extends Component {
             </Button>
           </a>
         </div>
-      </div>
+      </Card>
+    </div>
     );
   }
 }
