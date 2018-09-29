@@ -9,15 +9,27 @@ class RestoContainer extends Component {
   }
 
   render() {
-    return (
-      <div style={{position: "absolute"}}>
-        <Card className={this.props.cardClass}>
-          <Card.Content>
-            {this.props.name}
-          </Card.Content>
-        </Card>
-      </div>
-    );
+    if(this.props.cardClass === "cardRight"){
+      return (
+        <div className={this.props.cardClass} style={{position: "absolute", minWidth: "50vw", minHeight: "50vh"}}>
+          <Card className={this.props.cardClass}>
+            <Card.Content>
+              {this.props.name}
+            </Card.Content>
+          </Card>
+        </div>
+      )
+    }else{
+      return (
+        <div style={{position: "absolute"}}>
+          <Card className={this.props.cardClass}>
+            <Card.Content>
+              {this.props.name}
+            </Card.Content>
+          </Card>
+        </div>
+      );
+    }
   }
 }
 

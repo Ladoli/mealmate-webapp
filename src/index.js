@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 import './index.css';
 import App from './App';
 
-import RestoList from './components/RestoList';
 
 
+
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 
 ReactDOM.render(
-    // <Provider >
-      <Router>
-        <Route path={process.env.PUBLIC_URL+"/"} component={RestoList}/>
-      </Router>
-    // </Provider>
-    , document.getElementById('root')
-  );
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
