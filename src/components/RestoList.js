@@ -25,8 +25,19 @@ class RestoList extends Component {
       restoList: restoList,
       currentResto: null,
       lastAction: "",
+      Location: null
+    }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getPosition);
+    }
+    let that = this;
+    function getPosition(position) {
+        that.setState({
+          Location: {Lat: position.coords.latitude, Long: position.coords.longitude}
+        })
     }
   }
+
 
 
   renderRestos(){
@@ -41,20 +52,20 @@ class RestoList extends Component {
       }else if(key === cR+1){
         if(this.state.lastAction === "right"){
           return (
-            <RestoContainer position="absolute" cardClass="cardRight" images={value.FoodImages} name={value.Name} key={key} />
+            <RestoContainer position="absolute" cardClass="cardRight" currentLocation = {this.state.Location} restoInfo={value} images={value.FoodImages} name={value.Name} key={key} />
           )
         }else{
           return (
-            <RestoContainer  position="absolute" cardClass="cardLeft" images={value.FoodImages} name={value.Name} key={key} />
+            <RestoContainer  position="absolute" cardClass="cardLeft" currentLocation = {this.state.Location} restoInfo={value}  images={value.FoodImages} name={value.Name} key={key} />
           )
         }
       }else if(key === cR){
         return (
-          <RestoContainer  position="relative" cardClass="cardTest currentCard" images={value.FoodImages} name={value.Name} key={key} />
+          <RestoContainer  position="relative" cardClass="cardTest currentCard" currentLocation = {this.state.Location} restoInfo={value}  images={value.FoodImages} name={value.Name} key={key} />
         )
       }else {
         return (
-          <RestoContainer  position="absolute" cardClass="cardTest" images={value.FoodImages} name={value.Name} key={key} />
+          <RestoContainer  position="absolute" cardClass="cardTest" currentLocation = {this.state.Location} restoInfo={value} images={value.FoodImages} name={value.Name} key={key} />
         )
       }
     });
@@ -131,15 +142,10 @@ class RestoList extends Component {
               <Button onClick={this.clickYes} className="circleButton" >
                 <Icon name='check' color='green'/>
               </Button>
-            {/* </Button.Group> */}
-            <br/>
-            <div style={{textAlign: "center", paddingTop: "20px"}}>
-              <Button onClick={this.resetRestos} primary>
-                <Icon name='redo' />
-                Reset
+              <Button onClick={this.resetRestos} className="circleButton">
+                <Icon name='redo' color='blue' />
               </Button>
-            </div>
-
+            {/* </Button.Group> */}
           </Card.Content>
         </Card>
         <RestoData/>

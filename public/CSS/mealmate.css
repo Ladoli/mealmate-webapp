@@ -1,9 +1,10 @@
 .restoDisplay{
-  height: 80vh !important;
+  min-height: 80vh !important;
   width: 40vw !important;
   position: absolute !important;
   margin: 0 !important;
   min-width: 270px;
+  height: auto !important;
 }
 
 .restoDataInfo{
@@ -76,8 +77,8 @@
 }
 
 .imagePics{
-  height: 260px !important;
-  width: 260px !important;
+  height: 270px !important;
+  width: 270px !important;
   padding-left: 0px !important;
   padding-right: 0px !important;
   max-width: none !important;
@@ -89,9 +90,11 @@
 }
 
 .restoDataContent img{
-  max-height: 260px !important;
-  max-width: 260px !important;
+  height: 260px !important;
+  width: 260px !important;
 }
+
+
 
 @keyframes slideRight {
 			0% {opacity: 1;}
@@ -180,7 +183,7 @@ React Burger CSS Below
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
-
+190px
 
 *{
   font-family: 'Lora', serif;
@@ -188,7 +191,7 @@ React Burger CSS Below
 
 
 
-@media (max-width: 600px) {
+@media (max-width: 667px) {
   .content{
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -206,11 +209,32 @@ React Burger CSS Below
 
 }
 
-
-@media (max-width: 450px) {
-  .restoImagesCont{
-    min-width: 50vw !important;
+@media (max-height: 568px) {
+  .restoDisplay{
+    min-height: 450px !important;
   }
+}
+
+@media (max-height: 480px) {
+  .circleButtonSmall{
+    border-radius: 50% !important;
+    height: 7vh !important;
+    width: 7vh !important;
+    padding: 0px !important;
+    font-size: 7vh !important;
+    background-color: transparent !important;
+    margin: 0px !important;
+  }
+
+  .disappearSmall{
+    width: 0px !important;
+    height: 0px !important;
+    font-size: 0px !important;
+  }
+
+  /* .restoDisplay{
+    height: 100% !important;
+  } */
 
 
 }
