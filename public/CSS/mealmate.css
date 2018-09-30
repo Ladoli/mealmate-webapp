@@ -68,7 +68,6 @@
 .restoDataMenuTab{
   margin-left: 3vw !important;
   margin-right: 3vw !important;
-
 }
 
 .shadowLess{
@@ -76,11 +75,16 @@
 }
 
 .imagePics{
-  height: 180px !important;
-  width: 180px !important;
+  height: 260px !important;
+  width: 260px !important;
   padding-left: 0px !important;
   padding-right: 0px !important;
   max-width: none !important;
+}
+
+.noSidePadding{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 @keyframes slideRight {
@@ -182,6 +186,11 @@ React Burger CSS Below
   .content{
     padding-left: 0px !important;
     padding-right: 0px !important;
+  }
+
+  .restoDataContent{
+    width: 100% !important;
+    text-align: center;
   }
 
 }

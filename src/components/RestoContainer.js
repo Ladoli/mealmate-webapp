@@ -13,7 +13,7 @@ class RestoContainer extends Component {
 
     if(!isEmpty(images)){
       return(
-        <Card.Content fluid centered>
+        <Card.Content fluid centered className="noSidePadding">
           <div style={{textAlign: "center"}}>
             <Image centered rounded className="imagePics" src={images[0]} />
           </div>

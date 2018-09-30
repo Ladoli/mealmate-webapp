@@ -45,13 +45,13 @@ class RestoData extends Component {
         //   background: "webkit-linear-gradient(-50deg, #f12711, #f5af19)",
         //   background: "linear-gradient(-50deg, #f12711, #f5af19)",
         //   display: "flex", height: "100%", minHeight: "100vh"}}>
-        
+
           <Card fluid className="flexCenterAll restoDisplay restoDataInfo">
-            <Card.Content>
-              {this.props.restoData.name}
-            </Card.Content>
-            <Card.Content>
-              <Button.Group size='large'>
+            <Card.Header className="restoDataContent">
+              <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+                {this.props.restoData.name}
+              </div>
+              <Button.Group size='large' className="restoDataContent">
               <Button circular color='circleButton restoDataMenuTab'>
                 <MdStore color="#21ba45" />
               </Button>
@@ -63,11 +63,11 @@ class RestoData extends Component {
               </Button>
             </Button.Group>
 
-            </Card.Content>
-            <Card.Content>
+            </Card.Header>
+            <Card.Content className="restoDataContent">
               {this.props.restoData.desc}
             </Card.Content>
-            <Card.Content>
+            <Card.Content extra className="restoDataContent">
               <Button onClick={this.swipeLeft}  className="circleButton">
                 <Icon name='arrow circle left' color='red'/>
               </Button>

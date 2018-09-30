@@ -112,10 +112,10 @@ class RestoList extends Component {
       <div className="flexCenterAll restoBackground" style={{
         display: "flex", height: "100%", minHeight: "100vh"}}>
         <Card fluid className="flexCenterAll restoDisplay">
-          <Card.Content>
+          <Card.Content className="noSidePadding">
             {this.renderRestos()}
           </Card.Content>
-          <Card.Content style={{width: "100%", textAlign: "center"}}>
+          <Card.Content extra style={{width: "100%", textAlign: "center"}}>
             {/* <Button.Group> */}
               <Button onClick={this.clickNo}  className="circleButton" >
                 <Icon name='x' color='red'/>
