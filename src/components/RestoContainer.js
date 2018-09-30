@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import { map, isEmpty  } from 'lodash';
+import { isEmpty  } from 'lodash';
 
 
 
@@ -9,13 +9,11 @@ class RestoContainer extends Component {
 
   renderImages(){
     let images = this.props.images;
-    console.log(images)
-
     if(!isEmpty(images)){
       return(
-        <Card.Content fluid centered className="noSidePadding">
+        <Card.Content fluid="true" centered="true" className="noSidePadding">
           <div style={{textAlign: "center"}}>
-            <Image centered rounded className="imagePics" src={images[0]} />
+            <Image centered={true} rounded={true} className="imagePics" src={images[0]} />
           </div>
         </Card.Content>
       )
@@ -49,7 +47,7 @@ class RestoContainer extends Component {
     // }else{
       return (
         <div style={{position: this.props.position}} className={this.props.cardClass}>
-          <Card fluid centered className={this.props.cardClass + " shadowLess"} >
+          <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"} >
             {this.renderImages()}
             <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
                 {this.props.name}

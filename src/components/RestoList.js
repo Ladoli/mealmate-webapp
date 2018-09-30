@@ -18,16 +18,16 @@ class RestoList extends Component {
     this.clickYes = this.clickYes.bind(this);
     this.clickNo = this.clickNo.bind(this);
     this.resetRestos = this.resetRestos.bind(this);
-    let restoList = [{name: "KFC", desc: "Finger Lickin Chicken", FoodImages: [
+    let restoList = [{Name: "KFC", desc: "Finger Lickin Chicken", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/93ae44fa-fb79-48f6-b7d4-6c7b3f330b62.png?alt=media"
     ], StoreFront: "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/kfcFront.jpg?alt=media"},
-    {name: "Spudshack", desc: "Poutine. Nuff said.", FoodImages: [
+    {Name: "Spudshack", desc: "Poutine. Nuff said.", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/spudshack.jpg?alt=media"
     ]},
-    {name: "Captain's Boil", desc: "Spicy Seafood", FoodImages: [
+    {Name: "Captain's Boil", desc: "Spicy Seafood", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/cb.jpg?alt=media"
     ]},
-    {name: "Tangram Creamery", desc: "Best Icecream", FoodImages: [
+    {Name: "Tangram Creamery", desc: "Best Icecream", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/tangram.jpeg?alt=media"
     ], StoreFront: "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/tangramFront.jpg?alt=media"}];
     let resetCount = restoList.length -1;
@@ -48,20 +48,20 @@ class RestoList extends Component {
       }else if(key === cR+1){
         if(this.state.lastAction === "right"){
           return (
-            <RestoContainer position="absolute" cardClass="cardRight" images={value.FoodImages} name={value.name} key={key} />
+            <RestoContainer position="absolute" cardClass="cardRight" images={value.FoodImages} name={value.Name} key={key} />
           )
         }else{
           return (
-            <RestoContainer  position="absolute" cardClass="cardLeft" images={value.FoodImages} name={value.name} key={key} />
+            <RestoContainer  position="absolute" cardClass="cardLeft" images={value.FoodImages} name={value.Name} key={key} />
           )
         }
       }else if(key === cR){
         return (
-          <RestoContainer  position="relative" cardClass="cardTest currentCard" images={value.FoodImages} name={value.name} key={key} />
+          <RestoContainer  position="relative" cardClass="cardTest currentCard" images={value.FoodImages} name={value.Name} key={key} />
         )
       }else {
         return (
-          <RestoContainer  position="absolute" cardClass="cardTest" images={value.FoodImages} name={value.name} key={key} />
+          <RestoContainer  position="absolute" cardClass="cardTest" images={value.FoodImages} name={value.Name} key={key} />
         )
       }
     });
