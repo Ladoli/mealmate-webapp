@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Card, Button, Icon } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import { getRestoData, setRestoData } from "../actions";
+import { MdStore, MdRestaurantMenu, MdLocationOn } from 'react-icons/md';
+import { IconContext } from "react-icons";
+
+
 
 
 
@@ -41,14 +45,24 @@ class RestoData extends Component {
         //   background: "webkit-linear-gradient(-50deg, #f12711, #f5af19)",
         //   background: "linear-gradient(-50deg, #f12711, #f5af19)",
         //   display: "flex", height: "100%", minHeight: "100vh"}}>
-          <Card className="flexCenterAll restoDisplay restoDataInfo">
+        
+          <Card fluid className="flexCenterAll restoDisplay restoDataInfo">
             <Card.Content>
               {this.props.restoData.name}
             </Card.Content>
             <Card.Content>
-              <Button color='orange'>Store Front</Button>
-              <Button color='red'>Menu</Button>
-              <Button color='blue'>Location</Button>
+              <Button.Group size='large'>
+              <Button circular color='circleButton restoDataMenuTab'>
+                <MdStore color="#21ba45" />
+              </Button>
+              <Button color='circleButton restoDataMenuTab'>
+                <MdRestaurantMenu color='#EC0101'/>
+              </Button>
+              <Button color='circleButton restoDataMenuTab'>
+                <MdLocationOn color='#2185d0'/>
+              </Button>
+            </Button.Group>
+
             </Card.Content>
             <Card.Content>
               {this.props.restoData.desc}

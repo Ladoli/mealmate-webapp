@@ -13,9 +13,9 @@ class RestoContainer extends Component {
 
     if(!isEmpty(images)){
       return(
-        <Card.Content centered>
+        <Card.Content fluid centered>
           <div style={{textAlign: "center"}}>
-            <Image centered size='small' src={images[0]} />
+            <Image centered rounded className="imagePics" src={images[0]} />
           </div>
         </Card.Content>
       )
@@ -48,11 +48,11 @@ class RestoContainer extends Component {
     //   )
     // }else{
       return (
-        <div style={{position: "absolute"}}>
-          <Card className={this.props.cardClass}>
+        <div style={{position: this.props.position}} className={this.props.cardClass}>
+          <Card fluid centered className={this.props.cardClass + " shadowLess"} >
             {this.renderImages()}
-            <div style={{textAlign: "center"}}>
-              {this.props.name}
+            <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+                {this.props.name}
             </div>
           </Card>
         </div>

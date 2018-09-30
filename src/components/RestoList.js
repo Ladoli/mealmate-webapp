@@ -18,18 +18,18 @@ class RestoList extends Component {
     this.clickYes = this.clickYes.bind(this);
     this.clickNo = this.clickNo.bind(this);
     this.resetRestos = this.resetRestos.bind(this);
-    let restoList = [{name: "KFC", desc: "Finger Lickin Chicken", images: [
+    let restoList = [{name: "KFC", desc: "Finger Lickin Chicken", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/93ae44fa-fb79-48f6-b7d4-6c7b3f330b62.png?alt=media"
-    ]},
-    {name: "Spudshack", desc: "Poutine. Nuff said.", images: [
+    ], StoreFront: "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/kfcFront.jpg?alt=media"},
+    {name: "Spudshack", desc: "Poutine. Nuff said.", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/spudshack.jpg?alt=media"
     ]},
-    {name: "Captain's Boil", desc: "Spicy Seafood", images: [
+    {name: "Captain's Boil", desc: "Spicy Seafood", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/cb.jpg?alt=media"
     ]},
-    {name: "Tangram Creamery", desc: "Best Icecream", images: [
+    {name: "Tangram Creamery", desc: "Best Icecream", FoodImages: [
       "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/tangram.jpeg?alt=media"
-    ]}];
+    ], StoreFront: "https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/tangramFront.jpg?alt=media"}];
     let resetCount = restoList.length -1;
     this.state = {
       restoList: restoList,
@@ -48,23 +48,27 @@ class RestoList extends Component {
       }else if(key === cR+1){
         if(this.state.lastAction === "right"){
           return (
-            <RestoContainer cardClass="cardRight"  name={value.name} key={key} />
+            <RestoContainer position="absolute" cardClass="cardRight" images={value.FoodImages} name={value.name} key={key} />
           )
         }else{
           return (
-            <RestoContainer  cardClass="cardLeft" images={value.images} name={value.name} key={key} />
+            <RestoContainer  position="absolute" cardClass="cardLeft" images={value.FoodImages} name={value.name} key={key} />
           )
         }
+      }else if(key === cR){
+        return (
+          <RestoContainer  position="relative" cardClass="cardTest currentCard" images={value.FoodImages} name={value.name} key={key} />
+        )
       }else {
         return (
-          <RestoContainer  cardClass="cardTest" images={value.images} name={value.name} key={key} />
+          <RestoContainer  position="absolute" cardClass="cardTest" images={value.FoodImages} name={value.name} key={key} />
         )
       }
     });
 
     if (!isEmpty(restos)) {
       return (
-        <div style={{display: "block", minHeight: "35vh", position: "relative", minWidth: "40vw"}}>
+        <div className="restoImagesCont" style={{display: "block", minHeight: "35vh", position: "relative", minWidth: "40vw"}}>
           {restos}
         </div>
       )
@@ -106,8 +110,8 @@ class RestoList extends Component {
   render() {
     return (
       <div className="flexCenterAll restoBackground" style={{
-        display: "flex", height: "100%", minHeight: "100vh", overflow: "hidden"}}>
-        <Card className="flexCenterAll restoDisplay">
+        display: "flex", height: "100%", minHeight: "100vh"}}>
+        <Card fluid className="flexCenterAll restoDisplay">
           <Card.Content>
             {this.renderRestos()}
           </Card.Content>

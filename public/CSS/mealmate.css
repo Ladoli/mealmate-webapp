@@ -1,8 +1,9 @@
 .restoDisplay{
   height: 80vh !important;
-  width: 50vw !important;
+  width: 40vw !important;
   position: absolute !important;
   margin: 0 !important;
+  min-width: 270px;
 }
 
 .restoDataInfo{
@@ -13,12 +14,15 @@
   animation: disappear .5s 1 forwards;
   height: 80vh !important;
   width: 50vw !important;
+  min-width: 270px !important;
 }
 
 .restoBackground{
   background-color: "red";
   background-image: webkit-linear-gradient(-50deg, #f12711, #f5af19);
   background-image: linear-gradient(-50deg, #f12711, #f5af19);
+
+
 }
 
 
@@ -37,16 +41,18 @@
 .cardRight{
   min-width: 40vw !important;
   min-height: 35vh !important;
-  /* transform: translateX(100vw); */
-  /* opacity: 0;
-  transition: transform 1s 2s, opacity 2s 2s; */
-  animation: slideRight 2s 1 forwards;
+  opacity: 0;
+  /* animation: slideRight 2s 1 forwards; */
 }
 
 .cardLeft{
   min-width: 40vw !important;
   min-height: 35vh !important;
   animation: slideLeft 2s 1 forwards;
+}
+
+.currentCard{
+  animation: fadeIn 2s 1 forwards;
 }
 
 .circleButton{
@@ -59,6 +65,24 @@
   margin: 0px !important;
 }
 
+.restoDataMenuTab{
+  margin-left: 3vw !important;
+  margin-right: 3vw !important;
+
+}
+
+.shadowLess{
+  box-shadow: none !important;
+}
+
+.imagePics{
+  height: 180px !important;
+  width: 180px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  max-width: none !important;
+}
+
 @keyframes slideRight {
 			0% {opacity: 1;}
       50% {opacity: 1;}
@@ -67,22 +91,25 @@
 
 @keyframes slideLeft {
 			0% {transform: translateX(0px);}
-      100% {transform: translateX(-100vw);}
+      99% {min-height: 35vh }
+      100% {transform: translateX(-100vw); min-height: 0}
 }
 
 @keyframes appear {
-			0% {height: 40vh; width: 0vw; opacity: 0}
-      50% {opacity: 0}
-      100% {  height: 80vh;  width: 50vw; opacity: 1}
+			0% {height: 75vh; width: 0vw; opacity: 0}
+      100% {  height: 80vh;  width: 40vw; opacity: 1}
 }
 
 @keyframes disappear {
-			0% {  height: 80vh;  width: 50vw; opacity: 1}
-      50% {opacity: 1}
-      100% {height: 0vh; width: 0vw; opacity: 0}
+			0% {  height: 80vh; opacity: 1}
+      100% {height: 0vh; opacity: 0}
 }
 
-
+@keyframes fadeIn {
+			0% {opacity: 0.9; position: absolute;}
+      99% {position: absolute;}
+      100% {opacity: 1; position: absolute;}
+}
 
 /*
 
@@ -142,4 +169,30 @@ React Burger CSS Below
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+
+*{
+  font-family: 'Lora', serif;
+}
+
+
+
+@media (max-width: 600px) {
+  .content{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+  .restoImagesCont{
+    min-width: 50vw !important;
+  }
+
+  .cardTest, .content{
+    width: 100%!important;
+  }
 }
