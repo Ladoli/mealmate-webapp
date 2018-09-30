@@ -13,8 +13,9 @@
 .restoDataInfo-NoInfo{
   animation: disappear .5s 1 forwards;
   height: 80vh !important;
-  width: 50vw !important;
+  width: 40vw !important;
   min-width: 270px !important;
+  pointer-events: none !important;
 }
 
 .restoBackground{
