@@ -10,7 +10,7 @@ import App from './App';
 
 
 
-const store = createStore(reducers, {restoData: "initial"}, applyMiddleware(reduxThunk));
+const store = createStore(reducers, {restoData: "initial", firebase_restoList: null}, applyMiddleware(reduxThunk));
 
 
 ReactDOM.render(

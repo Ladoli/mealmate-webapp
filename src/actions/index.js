@@ -1,5 +1,5 @@
-import { authRef, provider } from "../config/firebase";
-import { FETCH_USER, RIGHT_SWIPE, GET_RESTO } from "./types";
+import { authRef, provider, restoRef } from "../config/firebase";
+import { FETCH_USER, RIGHT_SWIPE, GET_RESTO, GET_RESTO_LIST } from "./types";
 
 
 export const setRestoData = restoData  => ({
@@ -14,6 +14,14 @@ export const getRestoData = (restoData) => dispatch => {
       });
 };
 
+export const getRestoList = () => async dispatch => {
+  restoRef.on("value", snapshot =>{
+    dispatch({
+          type: GET_RESTO_LIST,
+          payload: snapshot.val()
+      });
+  });
+};
 
 
 export const fetchUser = () => dispatch => {
