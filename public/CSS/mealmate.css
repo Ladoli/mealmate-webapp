@@ -87,6 +87,11 @@
   padding-right: 0px !important;
 }
 
+.restoDataContent img{
+  max-height: 260px !important;
+  max-width: 260px !important;
+}
+
 @keyframes slideRight {
 			0% {opacity: 1;}
       50% {opacity: 1;}
@@ -193,6 +198,11 @@ React Burger CSS Below
     text-align: center;
   }
 
+  .cardTest, .content{
+    width: 100%!important;
+  }
+
+
 }
 
 
@@ -201,7 +211,5 @@ React Burger CSS Below
     min-width: 50vw !important;
   }
 
-  .cardTest, .content{
-    width: 100%!important;
-  }
+
 }
