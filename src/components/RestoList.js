@@ -148,7 +148,7 @@ class RestoList extends Component {
             {/* </Button.Group> */}
           </Card.Content>
         </Card>
-        <RestoData/>
+        <RestoData currentLocation = {this.state.Location}/>
       </div>
     );
   }

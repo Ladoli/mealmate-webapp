@@ -20,6 +20,11 @@ class RestoData extends Component {
     };
     this.swipeLeft = this.swipeLeft.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.goToGoogleMaps = this.goToGoogleMaps.bind(this);
+  }
+
+  goToGoogleMaps(link){
+    window.location.href = link;
   }
 
   swipeLeft(){
@@ -31,12 +36,24 @@ class RestoData extends Component {
     let that = this;
     let type = this.state.contentType;
     let menuImage = that.props.restoData.FoodImages[0];
-    let location = that.props.restoData.Location.Lat + ", " + that.props.restoData.Location.Long;
+    // let location = that.props.restoData.Location.Lat + ", " + that.props.restoData.Location.Long;
     if(type === 3){
+      let currentLocation = that.props.currentLocation;
+      let destination = that.props.restoData.Location;
+      if(!currentLocation || !destination){
+        return <div>
+          Location Not Provided.
+        </div>;
+      }
+      let middlePoint = {Lat: (destination.Lat + currentLocation.Lat)/2, Long: (destination.Long + currentLocation.Long)/2};
+      let directionParams = destination.Lat+",+"+destination.Long+"/"+currentLocation.Lat+",+"+currentLocation.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
+      let link = "https://www.google.ca/maps/dir/"+directionParams;
       return (
-
         <div>
-          {location}
+
+            <Button primary onClick={()=>this.goToGoogleMaps(link)}>
+              Directions
+            </Button>
         </div>
       )
     }else if(type === 2){
