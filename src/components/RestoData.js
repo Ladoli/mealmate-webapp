@@ -54,7 +54,7 @@ class RestoData extends Component {
       let link = "https://www.google.ca/maps/dir/"+directionParams;
 
       return (
-        <div>
+        <div style={{width: "270px", height: "270px", textAlign: "center"}} className="flexCenterAll">
             <Button primary onClick={()=>this.goToGoogleMaps(link)}>
               Directions
             </Button>

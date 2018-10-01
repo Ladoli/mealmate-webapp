@@ -80,7 +80,8 @@ body{
 .restoDataMenuTab{
   margin-left: 3vw !important;
   margin-right: 3vw !important;
-  opacity: .3 !important;
+  opacity: .8 !important;
+  transform: scale(1,1);
 }
 
 .shadowLess{
@@ -154,6 +155,8 @@ body{
 }
 
 .activeIcon{
+  transform: scale(1.5,1.5);
+  transition: transform 1s !important;
   opacity: 1 !important;
 }
 
