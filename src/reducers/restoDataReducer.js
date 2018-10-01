@@ -1,4 +1,4 @@
-import { RIGHT_SWIPE, GET_RESTO } from "../actions/types";
+import { RIGHT_SWIPE, GET_RESTO, RESET_RESTO } from "../actions/types";
 
 export default (state = null, action) => {
   switch (action.type) {
@@ -6,6 +6,8 @@ export default (state = null, action) => {
       return action.payload || null;
     case GET_RESTO:
       return action.payload || "initial";
+    case RESET_RESTO:
+      return "initial";
     default:
       return state;
   }

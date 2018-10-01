@@ -41,8 +41,13 @@ body{
 }
 
 .cardRight{
-  min-width: 40vw !important;
-  min-height: 35vh !important;
+  height: 0px !important;
+  opacity: 0;
+  /* animation: slideRight 2s 1 forwards; */
+}
+
+.cardRight img{
+  height: 0px !important;
   opacity: 0;
   /* animation: slideRight 2s 1 forwards; */
 }
@@ -87,6 +92,7 @@ body{
   padding-left: 0px !important;
   padding-right: 0px !important;
   max-width: none !important;
+  animation: lightFade 1s 1;
 }
 
 .noSidePadding{
@@ -109,7 +115,7 @@ body{
 
 .foodImageArrows{
   height: 100% !important;
-  width: 20px !important;
+  width: 40px !important;
   background-color: rgb(100,100,100) !important;
   opacity: .3 !important;
   position: absolute !important;
@@ -146,6 +152,11 @@ body{
 			0% {opacity: 0.9; position: absolute;}
       99% {position: absolute;}
       100% {opacity: 1; position: absolute;}
+}
+
+@keyframes lightFade {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
 /*

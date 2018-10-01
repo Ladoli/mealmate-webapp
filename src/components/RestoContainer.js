@@ -10,12 +10,16 @@ class RestoContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      currentImage: 0
+      currentImage: 0,
+      currentImageLink: this.props.images[0]
     }
     this.renderImages = this.renderImages.bind(this);
     this.calculateDistance = this.calculateDistance.bind(this);
     this.nextImage = this.nextImage.bind(this);
     this.prevImage = this.prevImage.bind(this);
+  }
+
+  componentDidMount(){
   }
 
   calculateDistance(location1, location2){
@@ -49,7 +53,10 @@ class RestoContainer extends Component {
     if(nextImage < 0){
       nextImage = this.props.images.length - 1;
     }
-    this.setState({currentImage: nextImage});
+    this.setState({
+      currentImage: nextImage,
+      currentImageLink: this.props.images[nextImage]
+    });
   }
 
   nextImage(){
@@ -58,21 +65,28 @@ class RestoContainer extends Component {
     if(nextImage > maxLength){
       nextImage = 0;
     }
-    this.setState({currentImage: nextImage});
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.setState({
+                currentImage: nextImage,
+                currentImageLink: this.props.images[nextImage]
+            });
+        });
+    });
   }
 
   renderImages(){
-    let images = this.props.images;
+    let image = this.state.currentImageLink;
     let renderArrows = (
       <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
-        <Image centered={true} rounded={true} className="imagePics" src={this.props.images[this.state.currentImage]} />
+        <Image centered={true} rounded={true} className="imagePics" src={image} />
       </div>
     )
 
     if(this.props.images.length > 1){
       renderArrows = (
         <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
-          <Image centered={true} rounded={true} className="imagePics" src={this.props.images[this.state.currentImage]} />
+          <Image centered={true} rounded={true} className="imagePics" src={image} />
           <div onClick={this.prevImage} className="foodImageArrows">
           </div>
           <div onClick={this.nextImage} className="foodImageArrows" style={{ right: "0px"}}>
@@ -80,7 +94,7 @@ class RestoContainer extends Component {
         </div>
       )
     }
-    if(!isEmpty(images)){
+    if(!isEmpty(this.props.images)){
       return(
         <Card.Content fluid="true" centered="true" className="noSidePadding">
           <div style={{textAlign: "center", overflow: "hidden"}}>
@@ -102,7 +116,6 @@ class RestoContainer extends Component {
   }
 
   render() {
-
     let distance = this.calculateDistance(this.props.restoInfo.Location, this.props.currentLocation);
 
       return (

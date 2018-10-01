@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react';
 import { connect } from "react-redux";
-import { getRestoData, setRestoData } from "../actions";
+import { getRestoData, setRestoData, resetRestoData } from "../actions";
 import { MdStore, MdRestaurantMenu, MdLocationOn } from 'react-icons/md';
 
 
@@ -28,8 +28,9 @@ class RestoData extends Component {
   }
 
   swipeLeft(){
-    const { setRestoData } = this.state;
-    setRestoData(null);
+    // const { setRestoData } = this.state;
+    // setRestoData(null);
+    this.props.resetRestoData();
   }
 
   renderContent(){
@@ -130,4 +131,4 @@ const mapStateToProps = ({ restoData, auth }) => {
   };
 };
 
-export default connect(mapStateToProps, { getRestoData, setRestoData })(RestoData);
+export default connect(mapStateToProps, { getRestoData, setRestoData, resetRestoData })(RestoData);
