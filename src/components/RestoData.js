@@ -88,10 +88,6 @@ class RestoData extends Component {
       );
     }
       return (
-        // <div className="flexCenterAll" style={{backgroundColor: "red",
-        //   background: "webkit-linear-gradient(-50deg, #f12711, #f5af19)",
-        //   background: "linear-gradient(-50deg, #f12711, #f5af19)",
-        //   display: "flex", height: "100%", minHeight: "100vh"}}>
 
           <Card fluid className="flexCenterAll restoDisplay restoDataInfo">
             <Card.Header className="restoDataContent">

@@ -134,7 +134,7 @@ class RestoList extends Component {
             {this.renderRestos()}
           </Card.Content>
           <Card.Content extra style={{width: "100%", textAlign: "center"}}>
-            {/* <Button.Group> */}
+            <Button.Group fluid>
               <Button onClick={this.clickNo}  className="circleButton" >
                 <Icon name='x' color='red'/>
               </Button>
@@ -145,7 +145,7 @@ class RestoList extends Component {
               <Button onClick={this.resetRestos} className="circleButton">
                 <Icon name='redo' color='blue' />
               </Button>
-            {/* </Button.Group> */}
+            </Button.Group>
           </Card.Content>
         </Card>
         <RestoData currentLocation = {this.state.Location}/>
