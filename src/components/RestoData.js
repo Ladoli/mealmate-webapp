@@ -16,7 +16,10 @@ class RestoData extends Component {
     this.props.getRestoData();
     this.state = {
       setRestoData: this.props.setRestoData,
-      contentType: 1
+      contentType: 1,
+      buttonStore: "activeIcon",
+      buttonMenu: "",
+      buttonLocation: ""
     };
     this.swipeLeft = this.swipeLeft.bind(this);
     this.renderContent = this.renderContent.bind(this);
@@ -24,7 +27,7 @@ class RestoData extends Component {
   }
 
   goToGoogleMaps(link){
-    window.location.href = link;
+    window.open(link, '_blank');
   }
 
   swipeLeft(){
@@ -47,11 +50,11 @@ class RestoData extends Component {
         </div>;
       }
       let middlePoint = {Lat: (destination.Lat + currentLocation.Lat)/2, Long: (destination.Long + currentLocation.Long)/2};
-      let directionParams = destination.Lat+",+"+destination.Long+"/"+currentLocation.Lat+",+"+currentLocation.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
+      let directionParams = currentLocation.Lat+",+"+currentLocation.Long+"/"+destination.Lat+",+"+destination.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
       let link = "https://www.google.ca/maps/dir/"+directionParams;
+
       return (
         <div>
-
             <Button primary onClick={()=>this.goToGoogleMaps(link)}>
               Directions
             </Button>
@@ -59,19 +62,33 @@ class RestoData extends Component {
       )
     }else if(type === 2){
       return (
-        <Image src={menuImage}/>
+        <Image className="imagePics" src={menuImage}/>
       )
     }else{
       return (
-        <Image src={this.props.restoData.StoreFront}/>
+        <Image className="imagePics" src={this.props.restoData.StoreFront}/>
       )
     }
   }
 
   setContentType(contentType){
+    let buttonStore = "";
+    let buttonMenu = "";
+    let buttonLocation = "";
+    if(contentType === 3){
+      buttonLocation = "activeIcon";
+    }else if(contentType === 2){
+      buttonMenu = "activeIcon";
+    }else{
+      buttonStore = "activeIcon";
+    }
     this.setState({
-      contentType
+      contentType,
+      buttonStore,
+      buttonMenu,
+      buttonLocation
     });
+
   }
 
 
@@ -96,13 +113,13 @@ class RestoData extends Component {
                 {this.props.restoData.Name}
               </div>
               <Button.Group size='large' className="restoDataContent">
-              <Button circular className='circleButton restoDataMenuTab' onClick={()=>this.setContentType(1)}>
+              <Button circular className={'circleButton restoDataMenuTab ' + this.state.buttonStore} onClick={()=>this.setContentType(1)}>
                 <MdStore color="#21ba45" />
               </Button>
-              <Button circular className='circleButton restoDataMenuTab' onClick={()=>this.setContentType(2)}>
+              <Button circular className={'circleButton restoDataMenuTab ' + this.state.buttonMenu} onClick={()=>this.setContentType(2)}>
                 <MdRestaurantMenu color='#EC0101'/>
               </Button>
-              <Button circular className='circleButton restoDataMenuTab' onClick={()=>this.setContentType(3)}>
+              <Button circular className={'circleButton restoDataMenuTab ' + this.state.buttonLocation} onClick={()=>this.setContentType(3)}>
                 <MdLocationOn color='#2185d0'/>
               </Button>
             </Button.Group>

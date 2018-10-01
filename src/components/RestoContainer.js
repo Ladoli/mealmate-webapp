@@ -17,6 +17,8 @@ class RestoContainer extends Component {
     this.calculateDistance = this.calculateDistance.bind(this);
     this.nextImage = this.nextImage.bind(this);
     this.prevImage = this.prevImage.bind(this);
+    this.renderArrows = this.renderArrows.bind(this);
+
   }
 
   componentDidMount(){
@@ -49,22 +51,44 @@ class RestoContainer extends Component {
   }
 
   prevImage(){
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.setState({
+                currentImageLink: null
+            });
+        });
+    });
+    
     let nextImage = this.state.currentImage - 1;
     if(nextImage < 0){
       nextImage = this.props.images.length - 1;
     }
-    this.setState({
-      currentImage: nextImage,
-      currentImageLink: this.props.images[nextImage]
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.setState({
+            currentImage: nextImage,
+            currentImageLink: this.props.images[nextImage]
+          });
+        });
     });
   }
 
   nextImage(){
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.setState({
+                currentImageLink: null
+            });
+        });
+    });
+
     let maxLength = this.props.images.length - 1;
     let nextImage = this.state.currentImage + 1;
     if(nextImage > maxLength){
       nextImage = 0;
     }
+
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           this.setState({
@@ -75,30 +99,46 @@ class RestoContainer extends Component {
     });
   }
 
-  renderImages(){
+  renderArrows(){
     let image = this.state.currentImageLink;
-    let renderArrows = (
-      <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
-        <Image centered={true} rounded={true} className="imagePics" src={image} />
-      </div>
-    )
+
+    if(!this.state.currentImageLink){
+      return ( <div></div> )
+    }
 
     if(this.props.images.length > 1){
-      renderArrows = (
+      return (
         <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
           <Image centered={true} rounded={true} className="imagePics" src={image} />
           <div onClick={this.prevImage} className="foodImageArrows">
+            <div className="flexCenterAll" style={{height: "100%", color: "white", fontSize: "38px", paddingTop: "10px", paddingLeft: "5px"}}>
+              {/* <Icon name='arrow alternate circle left outline'/> */}
+              <div className="sliderArrows sliderPrev"></div>
+            </div>
           </div>
           <div onClick={this.nextImage} className="foodImageArrows" style={{ right: "0px"}}>
+            <div className="flexCenterAll" style={{height: "100%", color: "white", fontSize: "38px", paddingTop: "10px", paddingLeft: "5px"}}>
+              <div className="sliderArrows sliderNext"></div>
+            </div>
           </div>
         </div>
       )
+    }else{
+      return (
+        <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
+          <Image centered={true} rounded={true} className="imagePics" src={image} />
+        </div>
+      )
     }
+  }
+
+  renderImages(){
+
     if(!isEmpty(this.props.images)){
       return(
         <Card.Content fluid="true" centered="true" className="noSidePadding">
           <div style={{textAlign: "center", overflow: "hidden"}}>
-            {renderArrows}
+            {this.renderArrows()}
           </div>
         </Card.Content>
       )

@@ -73,6 +73,21 @@ class RestoList extends Component {
     if (!isEmpty(restos)) {
       return (
         <div className="restoImagesCont" style={{display: "block", minHeight: "35vh", position: "relative", minWidth: "40vw"}}>
+          <div style={{position: "absolute"}} className="cardTest currentCard">
+            <Card fluid={true} centered={true} className="cardTest currentCard shadowLess" >
+              <Card.Content fluid="true" centered="true" className="noSidePadding flexCenterAll">
+                <div style={{textAlign: "center", overflow: "hidden"}}>
+                  <img className="imagePics" alt="Sad girl" src="https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/noFood.png?alt=media&token=e6be89d7-b5e7-4c91-b10f-c68f2ad3770e"/>
+                  <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+                    Sorry!
+                    <div style={{color: "rgb(150,150,150)", fontSize: "3vh", paddingTop: "10px", backgroundColor: "white"}}>
+                      There's no new restaurants around you
+                    </div>
+                  </div>
+                </div>
+              </Card.Content>
+            </Card>
+          </div>
           {restos}
         </div>
       )

@@ -63,7 +63,7 @@ body{
 }
 
 .circleButton{
-  border-radius: 50% !important;
+  /* border-radius: 50% !important; */
   height: 7vh !important;
   width: 7vh !important;
   padding: 0px !important;
@@ -80,6 +80,7 @@ body{
 .restoDataMenuTab{
   margin-left: 3vw !important;
   margin-right: 3vw !important;
+  opacity: .3 !important;
 }
 
 .shadowLess{
@@ -92,7 +93,8 @@ body{
   padding-left: 0px !important;
   padding-right: 0px !important;
   max-width: none !important;
-  animation: lightFade 1s 1;
+  border-radius: 7px !important;
+  animation: lightFade 1.5s 1;
 }
 
 .noSidePadding{
@@ -126,6 +128,34 @@ body{
   opacity: .5 !important;
 }
 
+.sliderArrows{
+  width: 48px;
+  height: 48px;
+  border-color: #000;
+  position: absolute;
+  top: 50%;
+  margin-top: -31px;
+  border-radius: 7px;
+}
+
+
+.sliderPrev{
+  border-bottom: 6px solid;
+  border-left: 6px solid;
+  transform: rotate(45deg);
+  left: 10px;
+}
+
+.sliderNext{
+  border-bottom: 6px solid;
+  border-left: 6px solid;
+  transform: rotate(-135deg);
+  right: 10px;
+}
+
+.activeIcon{
+  opacity: 1 !important;
+}
 
 @keyframes slideRight {
 			0% {opacity: 1;}
@@ -155,7 +185,7 @@ body{
 }
 
 @keyframes lightFade {
-  0% {opacity: 0;}
+  0% {opacity: .1;}
   100% {opacity: 1;}
 }
 
@@ -252,7 +282,7 @@ React Burger CSS Below
 
 @media (max-height: 480px) {
   .circleButtonSmall{
-    border-radius: 50% !important;
+    /* border-radius: 50% !important; */
     height: 7vh !important;
     width: 7vh !important;
     padding: 0px !important;
