@@ -35,7 +35,7 @@ class RestoData extends Component {
   renderContent(){
     let that = this;
     let type = this.state.contentType;
-    let menuImage = that.props.restoData.FoodImages[0];
+    let menuImage = that.props.restoData.MenuImages;
     // let location = that.props.restoData.Location.Lat + ", " + that.props.restoData.Location.Long;
     if(type === 3){
       let currentLocation = that.props.currentLocation;
