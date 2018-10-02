@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react';
 import { connect } from "react-redux";
-import { getRestoData, setRestoData, resetRestoData } from "../actions";
+import { fetchUser ,getRestoData, setRestoData, resetRestoData, addToUserFavourite, addToUserBlockList, getUserData } from "../actions";
 import { MdStore, MdRestaurantMenu, MdLocationOn } from 'react-icons/md';
-
 
 
 
@@ -21,18 +20,27 @@ class RestoData extends Component {
       buttonMenu: "",
       buttonLocation: ""
     };
+    this.props.getUserData(this.props.auth.uid);
     this.swipeLeft = this.swipeLeft.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.goToGoogleMaps = this.goToGoogleMaps.bind(this);
+    this.addToFavourites = this.addToFavourites.bind(this);
+    this.addToBlockList = this.addToBlockList.bind(this);
+  }
+
+  addToFavourites(){
+    this.props.addToUserFavourite(this.props.auth.uid, this.props.restoData.id);
+  }
+
+  addToBlockList(){
+    this.props.addToUserBlockList(this.props.auth.uid, this.props.restoData.id);
   }
 
   goToGoogleMaps(link){
     window.open(link, '_blank');
-  }
+  }addToBlockList
 
   swipeLeft(){
-    // const { setRestoData } = this.state;
-    // setRestoData(null);
     this.props.resetRestoData();
   }
 
@@ -40,7 +48,6 @@ class RestoData extends Component {
     let that = this;
     let type = this.state.contentType;
     let menuImage = that.props.restoData.MenuImages;
-    // let location = that.props.restoData.Location.Lat + ", " + that.props.restoData.Location.Long;
     if(type === 3){
       let currentLocation = that.props.currentLocation;
       let destination = that.props.restoData.Location;
@@ -52,12 +59,41 @@ class RestoData extends Component {
       let middlePoint = {Lat: (destination.Lat + currentLocation.Lat)/2, Long: (destination.Long + currentLocation.Long)/2};
       let directionParams = currentLocation.Lat+",+"+currentLocation.Long+"/"+destination.Lat+",+"+destination.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
       let link = "https://www.google.ca/maps/dir/"+directionParams;
-
+      let userData = that.props.userData;
+      let favourites = null;
+      let restoID = that.props.restoData.id;
+      let blocklist = null;
+      if(userData){
+        favourites = that.props.userData.favourites;
+        blocklist = that.props.userData.blocklist
+      }
       return (
         <div style={{width: "270px", height: "270px", textAlign: "center"}} className="flexCenterAll">
-            <Button primary onClick={()=>this.goToGoogleMaps(link)}>
-              Directions
-            </Button>
+            <Card>
+              <Card.Content>
+                <Button primary onClick={()=>this.goToGoogleMaps(link)}>
+                  <MdLocationOn /> DIRECTIONS
+                </Button>
+              </Card.Content>
+             {
+              (!favourites || (favourites && !favourites[restoID])) && (
+                  <Card.Content>
+                    <Button color='yellow' onClick={()=>this.addToFavourites()}>
+                      <Icon name='star' /> FAVOURITE
+                    </Button>
+                  </Card.Content>
+                )
+              }
+              {
+               (!blocklist || (blocklist && !blocklist[restoID]))  && (
+                   <Card.Content>
+                     <Button color='red' onClick={()=>this.addToBlockList()}>
+                       <Icon name='thumbs down' />BLOCKLIST
+                     </Button>
+                   </Card.Content>
+                 )
+               }
+            </Card>
         </div>
       )
     }else if(type === 2){
@@ -88,7 +124,6 @@ class RestoData extends Component {
       buttonMenu,
       buttonLocation
     });
-
   }
 
 
@@ -106,9 +141,8 @@ class RestoData extends Component {
       );
     }
       return (
-
-          <Card fluid className="flexCenterAll restoDisplay restoDataInfo">
-            <Card.Header className="restoDataContent">
+        <Card fluid className="flexCenterAll restoDisplay restoDataInfo">
+          <Card.Header className="restoDataContent">
               <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
                 {this.props.restoData.Name}
               </div>
@@ -123,29 +157,26 @@ class RestoData extends Component {
                 <MdLocationOn color='#2185d0'/>
               </Button>
             </Button.Group>
-
-            </Card.Header>
-            <Card.Content className="restoDataContent">
-              {this.renderContent()}
-              {/* {this.props.restoData.desc} */}
-            </Card.Content>
-            <Card.Content extra className="restoDataContent">
-              <Button onClick={this.swipeLeft}  className="circleButton">
-                <Icon name='arrow circle left' color='red'/>
-              </Button>
-            </Card.Content>
-          </Card>
-        // </div>
+          </Card.Header>
+          <Card.Content className="restoDataContent">
+            {this.renderContent()}
+          </Card.Content>
+          <Card.Content extra className="restoDataContent">
+            <Button onClick={this.swipeLeft}  className="circleButton">
+              <Icon name='arrow circle left' color='red'/>
+            </Button>
+          </Card.Content>
+        </Card>
       );
-
   }
 }
 
-const mapStateToProps = ({ restoData, auth }) => {
+const mapStateToProps = ({ restoData, auth, userData }) => {
   return {
     restoData,
-    auth
+    auth,
+    userData
   };
 };
 
-export default connect(mapStateToProps, { getRestoData, setRestoData, resetRestoData })(RestoData);
+export default connect(mapStateToProps, {fetchUser, getRestoData, setRestoData, resetRestoData, addToUserFavourite, addToUserBlockList, getUserData })(RestoData);

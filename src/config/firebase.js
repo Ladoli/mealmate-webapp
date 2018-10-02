@@ -11,10 +11,19 @@ const FirebaseConfig = {
   messagingSenderId: "567187566432"
 };
 
+// const FirebaseConfig = {
+//   apiKey: "AIzaSyCfOivJ6NsnXQYt1uHOrsiQgwA38wfLAb0",
+//   authDomain: "meal-mate-testing.firebaseapp.com",
+//   databaseURL: "https://meal-mate-testing.firebaseio.com",
+//   projectId: "meal-mate-testing",
+//   storageBucket: "meal-mate-testing.appspot.com",
+//   messagingSenderId: "320135549050"
+// };
+
 
 firebase.initializeApp(FirebaseConfig);
 
-const databaseRef = firebase.database().ref();
+export const databaseRef = firebase.database().ref();
 export const authRef = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const restoRef = databaseRef.child("Restaurants");

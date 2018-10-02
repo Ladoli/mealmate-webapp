@@ -31,5 +31,9 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({ auth }) => {
+  return { auth };
+}
 
-export default connect(null, { fetchUser, getRestoList })(App);
+
+export default connect(mapStateToProps, { fetchUser, getRestoList })(App);

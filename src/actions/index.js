@@ -1,6 +1,25 @@
-import { authRef, provider, restoRef } from "../config/firebase";
-import { FETCH_USER, RIGHT_SWIPE, GET_RESTO, GET_RESTO_LIST, RESET_RESTO } from "./types";
+import { authRef, provider, restoRef, databaseRef } from "../config/firebase";
+import { FETCH_USER, RIGHT_SWIPE, GET_RESTO, GET_RESTO_LIST, RESET_RESTO, GET_USER_DATA } from "./types";
+import { map } from 'lodash';
 
+
+
+export const addToUserFavourite = (id,restoID) => async dispatch => {
+  databaseRef.child('/Users/' + id + '/favourites/'+restoID).set(true);
+};
+
+export const addToUserBlockList = (id,restoID) => async dispatch => {
+  databaseRef.child('/Users/' + id + '/blocklist/'+restoID).set(true);
+};
+
+export const getUserData = (id) => async dispatch => {
+  databaseRef.child('/Users/' + id).on("value", snapshot =>{
+    dispatch({
+          type: GET_USER_DATA,
+          payload: snapshot.val()
+      });
+  });
+};
 
 export const setRestoData = restoData  => ({
         type: RIGHT_SWIPE,
@@ -14,18 +33,22 @@ export const getRestoData = (restoData) => dispatch => {
       });
 };
 
-export const resetRestoData = (restoData) => dispatch => {
+export const resetRestoData = () => dispatch => {
   dispatch({
         type: RESET_RESTO,
-        payload: restoData
+        payload: null
       });
 };
 
 export const getRestoList = () => async dispatch => {
   restoRef.on("value", snapshot =>{
+    let arrayConvert = map(snapshot.val(), (values,keys)=>{
+      return values;
+    });
+
     dispatch({
           type: GET_RESTO_LIST,
-          payload: snapshot.val()
+          payload: arrayConvert
       });
   });
 };
