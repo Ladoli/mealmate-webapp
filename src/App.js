@@ -15,12 +15,22 @@ class App extends Component {
     this.props.getRestoList();
   }
 
+
+
   render() {
+    let VerticalMenuWithProps = (props) => {
+      return (
+        <VerticalMenu
+          auth={this.props.auth}
+          {...props}
+        />
+      );
+    }
     return (
       <div className="restoBackground" id="outer-container">
         <Router history={history}>
           <div>
-            <Route path={process.env.PUBLIC_URL+"/"} component={requireAuth(VerticalMenu)}/>
+            <Route path={process.env.PUBLIC_URL+"/"} component={VerticalMenuWithProps} />
             <div id="page-wrap">
               <Route exact path={process.env.PUBLIC_URL+"/"} component={SignIn} />
               <Route path={process.env.PUBLIC_URL+"/app"} component={requireAuth(RestoList)} />
