@@ -13,10 +13,11 @@ class RestoList extends Component {
 
   constructor(props){
     super(props);
+    this.props.getUserData(this.props.auth.uid);
+    this.props.getRestoList();
     this.clickYes = this.clickYes.bind(this);
     this.clickNo = this.clickNo.bind(this);
     this.resetRestos = this.resetRestos.bind(this);
-    this.props.getRestoList();
     let restoList = [];
     if(this.props.firebase_restoList){
       restoList = this.props.firebase_restoList;
