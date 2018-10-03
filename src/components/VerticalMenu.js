@@ -30,20 +30,22 @@ class VerticalMenu extends Component {
         <Button color='green' onClick={this.resetBlockHander}>
           Reset Blocklist
         </Button>
-        <List>
-          <Header textAlign='center' attached="top" as='h3'>
-            <Icon name='star' color='yellow'/>
-          </Header>
-          <Button.Group vertical>
-            {
-              map(favourites, (value,key) =>{
-                return (
-                    <Button color='blue' key={key} onClick={()=>this.getSelectedRestoData(key)}>{value}</Button>
-                )
-              })
+            { favourites && (
+                <List>
+                  <Header textAlign='center' attached="top" as='h3'>
+                    <Icon name='star' color='yellow'/>
+                  </Header>
+                  <Button.Group fluid vertical>
+                    {
+                    map(favourites, (value,key) =>{
+                      return (
+                          <Button color='blue' fluid key={key} onClick={()=>this.getSelectedRestoData(key)}>{value}</Button>
+                      )
+                    })}
+                    </Button.Group>
+                </List>
+              )
             }
-          </Button.Group>
-        </List>
       </Menu>
     )
   }
