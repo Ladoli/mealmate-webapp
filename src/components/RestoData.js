@@ -3,6 +3,7 @@ import { Card, Button, Icon, Image } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import { fetchUser ,getRestoData, setRestoData, resetRestoData, addToUserFavourite, addToUserBlockList, getUserData } from "../actions";
 import { MdStore, MdRestaurantMenu, MdLocationOn } from 'react-icons/md';
+import swal from "sweetalert2";
 
 
 
@@ -30,10 +31,18 @@ class RestoData extends Component {
 
   addToFavourites(){
     this.props.addToUserFavourite(this.props.auth.uid, this.props.restoData.id);
+    swal({
+      title: "Feature not implemented yet!",
+      text: "Don't worry! Your choice is saved to your account for future content!"
+    });
   }
 
   addToBlockList(){
     this.props.addToUserBlockList(this.props.auth.uid, this.props.restoData.id);
+    swal({
+      title: "Feature not implemented yet!",
+      text: "Don't worry! Your choice is saved to your account for future content!"
+    });
   }
 
   goToGoogleMaps(link){
