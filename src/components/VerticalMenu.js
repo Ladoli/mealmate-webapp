@@ -1,24 +1,58 @@
 import React, { Component } from 'react';
-import { Input, Label } from 'semantic-ui-react';
+import { connect } from "react-redux";
+import { fetchUser, resetUserBlockList, getUserData, getRestoData } from "../actions";
+import { Button, List, Header, Icon } from 'semantic-ui-react';
+import { map } from 'lodash';
 import Menu from 'react-burger-menu/lib/menus/push';
 
 
-export default class VerticalMenu extends Component {
-  showSettings (event) {
-      event.preventDefault();
+class VerticalMenu extends Component {
 
-    }
+  constructor(props){
+    super(props)
+    this.props.getUserData(this.props.authenticated.uid);
+    this.getSelectedRestoData = this.getSelectedRestoData.bind(this);
+    this.resetBlockHander = this.resetBlockHander.bind(this);
+  }
 
+  resetBlockHander(){
+    this.props.resetUserBlockList(this.props.authenticated.uid);
+  }
+
+  getSelectedRestoData(id){
+    this.props.getRestoData(id)
+  }
 
   render() {
-
+    let favourites = this.props.userData ? this.props.userData.favourites : null;
     return (
       <Menu width={ 200 } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-        <a id="home" className="menu-item" href="/">Home</a>
-        <a id="about" className="menu-item" href="/about">About</a>
-        <a id="contact" className="menu-item" href="/contact">Contact</a>
-        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+        <Button color='green' onClick={this.resetBlockHander}>
+          Reset Blocklist
+        </Button>
+        <List>
+          <Header textAlign='center' attached="top" as='h3'>
+            <Icon name='star' color='yellow'/>
+          </Header>
+          <Button.Group vertical>
+            {
+              map(favourites, (value,key) =>{
+                return (
+                    <Button color='blue' key={key} onClick={()=>this.getSelectedRestoData(key)}>{value}</Button>
+                )
+              })
+            }
+          </Button.Group>
+        </List>
       </Menu>
     )
   }
 }
+
+const mapStateToProps = ({ userData }) => {
+  return {
+    userData
+  };
+};
+
+export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData} )(VerticalMenu);

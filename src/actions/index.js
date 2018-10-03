@@ -1,16 +1,28 @@
 import { authRef, provider, restoRef, databaseRef } from "../config/firebase";
 import { FETCH_USER, RIGHT_SWIPE, GET_RESTO, GET_RESTO_LIST, RESET_RESTO, GET_USER_DATA } from "./types";
 import { map } from 'lodash';
+import swal from 'sweetalert2';
 
 
-
-export const addToUserFavourite = (id,restoID) => async dispatch => {
-  databaseRef.child('/Users/' + id + '/favourites/'+restoID).set(true);
+export const addToUserFavourite = (id,restoID,name) => dispatch => {
+  databaseRef.child('/Users/' + id + '/favourites/'+restoID).set(name);
 };
 
-export const addToUserBlockList = (id,restoID) => async dispatch => {
-  databaseRef.child('/Users/' + id + '/blocklist/'+restoID).set(true);
+export const addToUserBlockList = (id,restoID) => dispatch => {
+    databaseRef.child('/Users/' + id + '/blocklist/'+restoID).set(true);
+
 };
+
+export const resetUserBlockList = (id) => dispatch => {
+  databaseRef.child('/Users/' + id + '/blocklist').remove();
+  swal({
+    title: "Blocklist has been reset!",
+    text: "Reloading app. Formerly blocked restaurants will now show up again once the app reloads.",
+  }).then((res)=>{
+    window.location.reload();
+  });
+};
+
 
 export const getUserData = (id) => async dispatch => {
   databaseRef.child('/Users/' + id).on("value", snapshot =>{
@@ -26,11 +38,13 @@ export const setRestoData = restoData  => ({
         payload: restoData
 });
 
-export const getRestoData = (restoData) => dispatch => {
-  dispatch({
-        type: GET_RESTO,
-        payload: restoData
+export const getRestoData = (restoID) => async dispatch => {
+  databaseRef.child('/Restaurants/' + restoID).on("value", snapshot =>{
+    dispatch({
+          type: GET_RESTO,
+          payload: snapshot.val()
       });
+  });
 };
 
 export const resetRestoData = () => dispatch => {

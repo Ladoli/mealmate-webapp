@@ -41,12 +41,14 @@ class RestoList extends Component {
 
   componentWillReceiveProps(nextProps){
     let that = this;
-    let filteredRestoList = this.props.firebase_restoList;
+    let filteredRestoList = nextProps.firebase_restoList;
+    let userData = nextProps.userData;
     this.setState({
-      filteredRestoList
+      filteredRestoList,
+      userData
     });
-    if(this.props.userData && this.props.userData.blocklist && this.props.firebase_restoList){
-        let blocklist = this.props.userData.blocklist;
+    if(nextProps.userData && nextProps.userData.blocklist && nextProps.firebase_restoList){
+        let blocklist = nextProps.userData.blocklist;
         filteredRestoList = filter(that.props.firebase_restoList,(value)=>{
           return !blocklist[value.id]
         });

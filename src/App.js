@@ -6,7 +6,7 @@ import { fetchUser, getRestoList } from "./actions";
 import history from './components/History';
 import RestoList from './components/RestoList';
 import SignIn from './components/SignIn';
-// import VerticalMenu from './components/VerticalMenu';
+import VerticalMenu from './components/VerticalMenu';
 
 
 class App extends Component {
@@ -18,12 +18,13 @@ class App extends Component {
   render() {
     return (
       <div className="restoBackground" id="outer-container">
-        {/* <VerticalMenu/> */}
         <Router history={history}>
-          <div id="page-wrap">
-            {/* <Route path={process.env.PUBLIC_URL+"/"} component={VerticalMenu} /> */}
-            <Route exact path={process.env.PUBLIC_URL+"/"} component={SignIn} />
-            <Route path={process.env.PUBLIC_URL+"/app"} component={requireAuth(RestoList)} />
+          <div>
+            <Route path={process.env.PUBLIC_URL+"/"} component={requireAuth(VerticalMenu)}/>
+            <div id="page-wrap">
+              <Route exact path={process.env.PUBLIC_URL+"/"} component={SignIn} />
+              <Route path={process.env.PUBLIC_URL+"/app"} component={requireAuth(RestoList)} />
+            </div>
           </div>
         </Router>
       </div>

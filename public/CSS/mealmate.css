@@ -160,6 +160,10 @@ body{
   opacity: 1 !important;
 }
 
+i {
+  margin-right: 0px !important;
+}
+
 @keyframes slideRight {
 			0% {opacity: 1;}
       50% {opacity: 1;}

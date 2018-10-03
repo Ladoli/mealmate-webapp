@@ -21,8 +21,6 @@ class RestoContainer extends Component {
 
   }
 
-  componentDidMount(){
-  }
 
   calculateDistance(location1, location2){
     const R = 6371e3; // value for meters
@@ -58,7 +56,7 @@ class RestoContainer extends Component {
             });
         });
     });
-    
+
     let nextImage = this.state.currentImage - 1;
     if(nextImage < 0){
       nextImage = this.props.images.length - 1;

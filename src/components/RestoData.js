@@ -13,7 +13,6 @@ class RestoData extends Component {
 
   constructor(props){
     super(props);
-    this.props.getRestoData();
     this.state = {
       setRestoData: this.props.setRestoData,
       contentType: 1,
@@ -30,18 +29,18 @@ class RestoData extends Component {
   }
 
   addToFavourites(){
-    this.props.addToUserFavourite(this.props.auth.uid, this.props.restoData.id);
+    this.props.addToUserFavourite(this.props.auth.uid, this.props.restoData.id, this.props.restoData.Name);
     swal({
-      title: "Feature not implemented yet!",
-      text: "Don't worry! Your choice is saved to your account for future content!"
+      title: "Restaurant has been saved!",
+      text: "You can now access this restaurant anytime from the menu on the left!"
     });
   }
 
   addToBlockList(){
     this.props.addToUserBlockList(this.props.auth.uid, this.props.restoData.id);
     swal({
-      title: "Feature not implemented yet!",
-      text: "Don't worry! Your choice is saved to your account for future content!"
+      title: "This restaurant has been blocked!",
+      text: "This restaurant has been removed from your list. It will not appear in future sessions!"
     });
   }
 
