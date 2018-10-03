@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { map, isEmpty  } from 'lodash';
+import { map, isEmpty, filter  } from 'lodash';
 import RestoContainer from './RestoContainer';
 import RestoData from './RestoData';
 import { Card, Button, Icon } from 'semantic-ui-react';
@@ -39,14 +39,33 @@ class RestoList extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    let that = this;
+    let filteredRestoList = this.props.firebase_restoList;
+    this.setState({
+      filteredRestoList
+    });
+    if(this.props.userData && this.props.userData.blocklist && this.props.firebase_restoList){
+        let blocklist = this.props.userData.blocklist;
+        filteredRestoList = filter(that.props.firebase_restoList,(value)=>{
+          return !blocklist[value.id]
+        });
+        filteredRestoList = map(filteredRestoList, (value,key)=>{
+          return value;
+        });
+        this.setState({
+          filteredRestoList
+        });
+    }
+  }
 
 
   renderRestos(){
     let that = this;
-    let restos = map(that.props.firebase_restoList, (value,key)=>{
+    let restos = map(that.state.filteredRestoList, (value,key)=>{
       let cR = that.state.currentResto;
       if(cR === null){
-        cR = that.props.firebase_restoList.length - 1;
+        cR = that.state.filteredRestoList.length - 1;
       }
       if(key > cR+1){
         return <div key={key}></div>
@@ -99,14 +118,14 @@ class RestoList extends Component {
   }
 
   clickYes(){
-    let { firebase_restoList } = this.props;
-    let restoListLength = firebase_restoList.length;
-    let selectedRestoData = firebase_restoList[this.state.currentResto];
+    let { filteredRestoList } = this.state;
+    let restoListLength = filteredRestoList.length;
+    let selectedRestoData = filteredRestoList[this.state.currentResto];
     let topCard;
     if(this.state.currentResto !== null){
       topCard = this.state.currentResto - 1;
     }else{
-      selectedRestoData = firebase_restoList[restoListLength-1];
+      selectedRestoData = filteredRestoList[restoListLength-1];
       topCard = restoListLength - 2;
     }
     this.setState({
@@ -118,8 +137,8 @@ class RestoList extends Component {
   }
 
   clickNo(){
-    let { firebase_restoList } = this.props;
-    let restoListLength = firebase_restoList.length;
+    let { filteredRestoList } = this.state;
+    let restoListLength = filteredRestoList.length;
     let topCard;
     if(this.state.currentResto !== null){
       topCard = this.state.currentResto - 1;
@@ -133,7 +152,7 @@ class RestoList extends Component {
   }
 
   resetRestos(){
-    let resetNumber = this.props.firebase_restoList.length - 1;
+    let resetNumber = this.state.filteredRestoList.length - 1;
     this.setState({
       currentResto: resetNumber
     });
@@ -170,11 +189,12 @@ class RestoList extends Component {
   }
 }
 
-const mapStateToProps = ({ firebase_restoList,restoData, auth }) => {
+const mapStateToProps = ({ firebase_restoList,restoData, auth,userData }) => {
   return {
     firebase_restoList,
     restoData,
-    auth
+    auth,
+    userData
   };
 };
 

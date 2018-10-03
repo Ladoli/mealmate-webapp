@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react';
 import { connect } from "react-redux";
-import { fetchUser ,getRestoData, setRestoData, resetRestoData, addToUserFavourite, addToUserBlockList, getUserData } from "../actions";
+import * as actions from "../actions";
 import { MdStore, MdRestaurantMenu, MdLocationOn } from 'react-icons/md';
 import swal from "sweetalert2";
 
@@ -188,4 +188,4 @@ const mapStateToProps = ({ restoData, auth, userData }) => {
   };
 };
 
-export default connect(mapStateToProps, {fetchUser, getRestoData, setRestoData, resetRestoData, addToUserFavourite, addToUserBlockList, getUserData })(RestoData);
+export default connect(mapStateToProps, actions)(RestoData);
