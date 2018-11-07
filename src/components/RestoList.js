@@ -85,7 +85,7 @@ class RestoList extends Component {
         }
       }else if(key === cR){
         return (
-          <RestoContainer  position="relative" cardClass="cardTest currentCard" currentLocation = {this.state.Location} restoInfo={value}  images={value.FoodImages} name={value.Name} key={key} />
+          <RestoContainer  position="relative" cardClass="cardTest fadeIn" currentLocation = {this.state.Location} restoInfo={value}  images={value.FoodImages} name={value.Name} key={key} />
         )
       }else {
         return (
@@ -97,8 +97,8 @@ class RestoList extends Component {
     if (!isEmpty(restos)) {
       return (
         <div className="restoImagesCont" style={{display: "block", minHeight: "35vh", position: "relative", minWidth: "40vw"}}>
-          <div style={{position: "absolute"}} className="cardTest currentCard">
-            <Card fluid={true} centered={true} className="cardTest currentCard shadowLess" >
+          <div style={{position: "absolute"}} className="cardTest fadeIn">
+            <Card fluid={true} centered={true} className="cardTest fadeIn shadowLess" >
               <Card.Content fluid="true" centered="true" className="noSidePadding flexCenterAll">
                 <div style={{textAlign: "center", overflow: "hidden"}}>
                   <img className="imagePics" alt="Sad girl" src="https://firebasestorage.googleapis.com/v0/b/meal-mate-da7f4.appspot.com/o/noFood.png?alt=media&token=e6be89d7-b5e7-4c91-b10f-c68f2ad3770e"/>

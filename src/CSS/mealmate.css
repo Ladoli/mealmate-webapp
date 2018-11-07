@@ -58,8 +58,8 @@ body{
   animation: slideLeft 2.2s 1 forwards;
 }
 
-.currentCard{
-  animation: fadeIn 2s 1 forwards;
+.fadeIn{
+  animation: fadeIn 2s 1 forwards !important;
 }
 
 .circleButton{

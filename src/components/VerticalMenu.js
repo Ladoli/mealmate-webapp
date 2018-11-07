@@ -53,7 +53,7 @@ class VerticalMenu extends Component {
       return <div></div>
     }
     let { favourites, blocklist } = this.props.userData ? this.props.userData : { favourites: null, blocklist: null };
-    let blockListText = this.state.showBlocklist ? "Hide Blocklist" : "Show Blocklist";
+    let blockListText = this.state.showBlocklist ? "Hide" : "Show";
     return (
       <Menu width={ 200 } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
         { favourites && (
@@ -67,7 +67,7 @@ class VerticalMenu extends Component {
                     return (
                       <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
                         <Button primary 
-                          className="faveOption flexCenterAll ui button"
+                          className="userSpecOption flexCenterAll"
                           onClick={()=>this.getSelectedRestoData(key)}>
                           {value}
                         </Button>
@@ -88,7 +88,7 @@ class VerticalMenu extends Component {
           <Button fluid 
             color='red' 
             onClick={this.toggleBlocklist}>
-            {blockListText}
+            {blockListText}<br/> Blocklist
           </Button>
           )
         }
@@ -98,14 +98,14 @@ class VerticalMenu extends Component {
               {     
                 map(blocklist, (value,key) =>{
                   return (
-                    <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
+                    <Segment className="noPadding flexCenterAll burgerMenuFader" style={{margin: "0px"}} key={key}>
                       <Button
-                        color='red'  
-                        className="faveOption flexCenterAll ui button"
+                        color='orange'  
+                        className="userSpecOption flexCenterAll"
                         onClick={()=>this.getSelectedRestoData(key)}>
                         {value.toString()}
                       </Button>
-                      <Button compact primary
+                      <Button compact
                         color='red' 
                         icon='trash alternate'  
                         className="deleteMenuButton"

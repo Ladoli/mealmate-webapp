@@ -1,17 +1,35 @@
-.faveOption{
+.userSpecOption{
     width: 70% !important;
-    height: 30px !important;
+    height: 50px !important;
     border-radius: 0.285714rem !important;
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
     line-height: 12px !important;
+    font-size: .8em !important;
 }
 
 
 .deleteMenuButton{
     width: 30% !important;
-    height: 30px !important;
+    height: 50px !important;
     border-radius: 0.285714rem !important;
+    color: red !important;
+    background-color: white !important;
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
+}
+
+.burgerMenuFader{
+    animation: burgerFadeIn 1.5s 1 forwards !important;
+    -webkit-animation: burgerFadeIn 1.5s 1 forwards !important; /* Safari */
+}
+
+@keyframes burgerFadeIn{
+    0% { opacity: 0 }  
+    100% { opacity: 1 }
+}
+
+@-webkit-keyframes burgerFadeIn{
+    0% { opacity: 0 }  
+    100% { opacity: 1 }
 }
