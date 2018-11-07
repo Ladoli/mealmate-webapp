@@ -106,7 +106,7 @@ class RestoContainer extends Component {
 
     if(this.props.images.length > 1){
       return (
-        <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
+        <div style={{cursor: "pointer", display: "inline-block",overflow: "hidden", position: "relative"}}>
           <Image onClick={this.nextImage} centered={true} rounded={true} className="imagePics" src={image} />
           <div onClick={this.prevImage} className="foodImageArrows">
             <div className="flexCenterAll" style={{height: "100%", color: "white", fontSize: "38px", paddingTop: "10px", paddingLeft: "5px"}}>
