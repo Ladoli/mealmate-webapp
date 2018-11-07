@@ -214,7 +214,6 @@ class RestoList extends Component {
                 className="circleButton" >
                 <Icon name='x' color='red'/>
               </Button>
-              {/* <Button.Or /> */}
               <Button 
                 onClick={this.clickYes} 
                 className="circleButton" >
