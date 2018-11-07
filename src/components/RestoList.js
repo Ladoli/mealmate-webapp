@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { map, isEmpty, filter  } from 'lodash';
 import RestoContainer from './RestoContainer';
 import RestoData from './RestoData';
-import { Card, Button, Icon } from 'semantic-ui-react';
+import { Card, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import swal from 'sweetalert2';
 import * as actions from "../actions";
@@ -194,7 +194,11 @@ class RestoList extends Component {
 
   render() {
     if(!this.props.userData){
-      return <div>Loading</div>
+      return <div>
+        <Dimmer active>
+          <Loader size='massive'>Loading</Loader>
+        </Dimmer>
+      </div>
     }
     return (
       <div className="flexCenterAll restoBackground" style={{
