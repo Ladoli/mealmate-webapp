@@ -12,8 +12,12 @@ export const removeUserFavourite = (id,restoID) => dispatch => {
   databaseRef.child('/Users/' + id + '/favourites/'+restoID).remove();
 };
 
-export const addToUserBlockList = (id,restoID) => dispatch => {
-    databaseRef.child('/Users/' + id + '/blocklist/'+restoID).set(true);
+export const addToUserBlockList = (id,restoID,name) => dispatch => {
+    databaseRef.child('/Users/' + id + '/blocklist/'+restoID).set(name);
+};
+
+export const removeUserBlockList = (id,restoID) => dispatch => {
+  databaseRef.child('/Users/' + id + '/blocklist/'+restoID).remove();
 };
 
 export const resetUserBlockList = (id) => dispatch => {

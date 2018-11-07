@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite } from "../actions";
+import { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite, removeUserBlockList } from "../actions";
 import { Button, List, Header, Icon, Segment } from 'semantic-ui-react';
 import { map } from 'lodash';
 import Menu from 'react-burger-menu/lib/menus/push';
@@ -14,9 +14,11 @@ class VerticalMenu extends Component {
     if(this.props.auth){
       this.props.getUserData(this.props.auth.uid);
     }
+    this.state = { showBlocklist: false }
     this.getSelectedRestoData = this.getSelectedRestoData.bind(this);
     this.resetBlockHander = this.resetBlockHander.bind(this);
     this.removeFavourite = this.removeFavourite.bind(this);
+    this.toggleBlocklist = this.toggleBlocklist.bind(this);
   }
 
   componentWillMount(){
@@ -37,47 +39,90 @@ class VerticalMenu extends Component {
     this.props.removeUserFavourite(this.props.auth.uid, id);
   }
 
+  removeBlock = (id) => {
+    this.props.removeUserBlockList(this.props.auth.uid, id);
+  }
+
+  toggleBlocklist(){
+    let newState = this.state.showBlocklist ? false : true;
+    this.setState({showBlocklist: newState});
+  }
+
   render() {
-    let favourites = this.props.userData ? this.props.userData.favourites : null;
-    if(!this.props.auth){
+    if(!this.props.auth || !this.props.userData){
       return <div></div>
     }
+    let { favourites, blocklist } = this.props.userData ? this.props.userData : null;
+    let blockListText = this.state.showBlocklist ? "Hide Blocklist" : "Show Blocklist";
     return (
       <Menu width={ 200 } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-
-      { this.props.auth && (
-        <Button color='green' onClick={this.resetBlockHander}>
-          Reset Blocklist
-        </Button>
-        )
-      }
-            { favourites && (
-                <List>
-                  <Header textAlign='center' attached="top" as='h3'>
-                    <Icon name='star' color='yellow'/>
-                  </Header>
-                  <Button.Group fluid vertical>
-                    {
-                    map(favourites, (value,key) =>{
-                      return (
-                        <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
-                          <Button primary 
-                            className="faveOption flexCenterAll ui button"
-                            onClick={()=>this.getSelectedRestoData(key)}>
-                            {value}
-                          </Button>
-                          <Button compact
-                            color='red' 
-                            icon='trash alternate'  
-                            className="deleteMenuButton"
-                            onClick={()=>this.removeFavourite(key)}/>
-                        </Segment>
-                      )
-                    })}
-                    </Button.Group>
-                </List>
-              )
-            }
+        { favourites && (
+            <List>
+              <Header textAlign='center' attached="top" as='h3'>
+                <Icon name='star' color='yellow'/>
+              </Header>
+              <Button.Group fluid vertical>
+                {
+                  map(favourites, (value,key) =>{
+                    return (
+                      <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
+                        <Button primary 
+                          className="faveOption flexCenterAll ui button"
+                          onClick={()=>this.getSelectedRestoData(key)}>
+                          {value}
+                        </Button>
+                        <Button compact
+                          color='red' 
+                          icon='trash alternate'  
+                          className="deleteMenuButton"
+                          onClick={()=>this.removeFavourite(key)}/>
+                      </Segment>
+                    )
+                  })
+                }
+                </Button.Group>
+            </List>
+          )
+        }
+        { blocklist && (
+          <Button fluid 
+            color='red' 
+            onClick={this.toggleBlocklist}>
+            {blockListText}
+          </Button>
+          )
+        }
+        {
+          this.state.showBlocklist && (
+            <Button.Group fluid vertical>
+              {     
+                map(blocklist, (value,key) =>{
+                  return (
+                    <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
+                      <Button
+                        color='red'  
+                        className="faveOption flexCenterAll ui button"
+                        onClick={()=>this.getSelectedRestoData(key)}>
+                        {value.toString()}
+                      </Button>
+                      <Button compact primary
+                        color='red' 
+                        icon='trash alternate'  
+                        className="deleteMenuButton"
+                        onClick={()=>this.removeBlock(key)}/>
+                    </Segment>
+                  )
+                })
+              }
+            </Button.Group>
+          )
+        }
+        <Button fluid 
+            color='green'
+            style={{marginTop: '1em'}} 
+            onClick={this.resetBlockHander}>
+            Reset Blocklist
+          </Button>
       </Menu>
     )
   }
@@ -89,4 +134,4 @@ const mapStateToProps = ({ userData }) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite} )(VerticalMenu);
+export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite, removeUserBlockList } )(VerticalMenu);

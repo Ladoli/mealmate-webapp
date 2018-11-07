@@ -173,7 +173,8 @@ class RestoList extends Component {
       cancelButtonColor: '#3085d6',
     }).then((result) => {
       if (result.value) {
-        that.props.addToUserBlockList(this.props.auth.uid, filteredRestoList[currentResto].id);
+        let {id, Name } =  filteredRestoList[currentResto];
+        that.props.addToUserBlockList(this.props.auth.uid, id, Name);
         swal({
           title: "This restaurant has been blocked!",
           text: "This restaurant has been removed from your list. It will not appear in future sessions!"
@@ -196,7 +197,12 @@ class RestoList extends Component {
     if(!this.props.userData){
       return <div>
         <Dimmer active>
-          <Loader size='massive'>Loading</Loader>
+          <Loader size='massive'>
+            Loading
+            <br/>
+            <br/>
+            Taking too long? Firebase may be down!
+          </Loader>
         </Dimmer>
       </div>
     }
