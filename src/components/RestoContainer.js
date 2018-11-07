@@ -107,10 +107,9 @@ class RestoContainer extends Component {
     if(this.props.images.length > 1){
       return (
         <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
-          <Image centered={true} rounded={true} className="imagePics" src={image} />
+          <Image onClick={this.nextImage} centered={true} rounded={true} className="imagePics" src={image} />
           <div onClick={this.prevImage} className="foodImageArrows">
             <div className="flexCenterAll" style={{height: "100%", color: "white", fontSize: "38px", paddingTop: "10px", paddingLeft: "5px"}}>
-              {/* <Icon name='arrow alternate circle left outline'/> */}
               <div className="sliderArrows sliderPrev"></div>
             </div>
           </div>
