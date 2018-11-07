@@ -49,10 +49,10 @@ class VerticalMenu extends Component {
   }
 
   render() {
-    if(!this.props.auth || !this.props.userData){
+    if(!this.props.auth){
       return <div></div>
     }
-    let { favourites, blocklist } = this.props.userData ? this.props.userData : null;
+    let { favourites, blocklist } = this.props.userData ? this.props.userData : { favourites: null, blocklist: null };
     let blockListText = this.state.showBlocklist ? "Hide Blocklist" : "Show Blocklist";
     return (
       <Menu width={ 200 } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>

@@ -194,7 +194,7 @@ class RestoList extends Component {
 
 
   render() {
-    if(!this.props.userData){
+    if(!this.props.auth){
       return <div>
         <Dimmer active>
           <Loader size='massive'>
@@ -245,7 +245,7 @@ class RestoList extends Component {
   }
 }
 
-const mapStateToProps = ({ firebase_restoList,restoData, auth,userData }) => {
+const mapStateToProps = ({ firebase_restoList,restoData, auth, userData }) => {
   return {
     firebase_restoList,
     restoData,

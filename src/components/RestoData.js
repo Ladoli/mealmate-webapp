@@ -25,7 +25,6 @@ class RestoData extends Component {
     this.renderContent = this.renderContent.bind(this);
     this.goToGoogleMaps = this.goToGoogleMaps.bind(this);
     this.addToFavourites = this.addToFavourites.bind(this);
-    // this.addToBlockList = this.addToBlockList.bind(this);
   }
 
   addToFavourites(){
@@ -59,7 +58,7 @@ class RestoData extends Component {
       let middlePoint = {Lat: (destination.Lat + currentLocation.Lat)/2, Long: (destination.Long + currentLocation.Long)/2};
       let directionParams = currentLocation.Lat+",+"+currentLocation.Long+"/"+destination.Lat+",+"+destination.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
       let link = "https://www.google.ca/maps/dir/"+directionParams;
-      let { favourites } = that.props.userData;
+      let favourites = that.props.userData ? that.props.userData.favourites : null;
       let restoID = that.props.restoData.id;
       return (
         <div style={{width: "270px", height: "270px", textAlign: "center"}} className="flexCenterAll">

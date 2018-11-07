@@ -18,6 +18,12 @@ export const addToUserBlockList = (id,restoID,name) => dispatch => {
 
 export const removeUserBlockList = (id,restoID) => dispatch => {
   databaseRef.child('/Users/' + id + '/blocklist/'+restoID).remove();
+  swal({
+    title: "Restaurant has been unblocked!",
+    text: "Reloading app. The restaurant will now show up again once the app reloads.",
+  }).then((res)=>{
+    window.location.reload();
+  });
 };
 
 export const resetUserBlockList = (id) => dispatch => {
