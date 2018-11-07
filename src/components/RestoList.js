@@ -198,7 +198,7 @@ class RestoList extends Component {
       return <div>
         <Dimmer active>
           <Loader size='massive'>
-            Loading
+            <h1 className="fader">Loading...</h1>
             <br/>
             <br/>
             Taking too long? Firebase may be down!

@@ -168,6 +168,23 @@ i {
   margin-right: 0px !important;
 }
 
+.fader{
+  animation: fadeInOut 2s infinite;
+  -webkit-animation: fadeInOut 2s infinite; /* Safari */
+}
+
+@-webkit-keyframes fadeInOut {
+  0% { opacity: .1}
+  60% { opacity: .5}
+  100% { opacity: .1}
+}
+
+@keyframes fadeInOut {
+  0% { opacity: .1}
+  60% { opacity: .5}
+  100% { opacity: .1}
+}
+
 @keyframes slideRight {
 			0% {opacity: 1;}
       50% {opacity: 1;}
