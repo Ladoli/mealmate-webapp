@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchUser, resetUserBlockList, getUserData, getRestoData } from "../actions";
-import { Button, List, Header, Icon } from 'semantic-ui-react';
+import { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite } from "../actions";
+import { Button, List, Header, Icon, Segment } from 'semantic-ui-react';
 import { map } from 'lodash';
 import Menu from 'react-burger-menu/lib/menus/push';
+import './VerticalMenu.css';
 
 
 class VerticalMenu extends Component {
@@ -15,6 +16,7 @@ class VerticalMenu extends Component {
     }
     this.getSelectedRestoData = this.getSelectedRestoData.bind(this);
     this.resetBlockHander = this.resetBlockHander.bind(this);
+    this.removeFavourite = this.removeFavourite.bind(this);
   }
 
   componentWillMount(){
@@ -29,6 +31,10 @@ class VerticalMenu extends Component {
 
   getSelectedRestoData(id){
     this.props.getRestoData(id)
+  }
+
+  removeFavourite(id){
+    this.props.removeUserFavourite(this.props.auth.uid, id);
   }
 
   render() {
@@ -54,7 +60,18 @@ class VerticalMenu extends Component {
                     {
                     map(favourites, (value,key) =>{
                       return (
-                          <Button color='blue' fluid key={key} onClick={()=>this.getSelectedRestoData(key)}>{value}</Button>
+                        <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
+                          <Button primary 
+                            className="faveOption flexCenterAll ui button"
+                            onClick={()=>this.getSelectedRestoData(key)}>
+                            {value}
+                          </Button>
+                          <Button compact
+                            color='red' 
+                            icon='trash alternate'  
+                            className="deleteMenuButton"
+                            onClick={()=>this.removeFavourite(key)}/>
+                        </Segment>
                       )
                     })}
                     </Button.Group>
@@ -72,4 +89,4 @@ const mapStateToProps = ({ userData }) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData} )(VerticalMenu);
+export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite} )(VerticalMenu);

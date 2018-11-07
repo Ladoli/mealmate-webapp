@@ -8,9 +8,12 @@ export const addToUserFavourite = (id,restoID,name) => dispatch => {
   databaseRef.child('/Users/' + id + '/favourites/'+restoID).set(name);
 };
 
+export const removeUserFavourite = (id,restoID) => dispatch => {
+  databaseRef.child('/Users/' + id + '/favourites/'+restoID).remove();
+};
+
 export const addToUserBlockList = (id,restoID) => dispatch => {
     databaseRef.child('/Users/' + id + '/blocklist/'+restoID).set(true);
-
 };
 
 export const resetUserBlockList = (id) => dispatch => {

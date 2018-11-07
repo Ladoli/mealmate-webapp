@@ -103,6 +103,10 @@ body{
   padding-right: 0px !important;
 }
 
+.noPadding{
+  padding: 0px !important;
+}
+
 .restoDataContent img{
   height: 260px !important;
   width: 260px !important;
@@ -255,7 +259,6 @@ React Burger CSS Below
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
-190px
 
 *{
   font-family: 'Lora', serif;

@@ -1,0 +1,16 @@
+.faveOption{
+    width: 70% !important;
+    height: 30px !important;
+    border-radius: 0.285714rem !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+
+.deleteMenuButton{
+    width: 30% !important;
+    height: 30px !important;
+    border-radius: 0.285714rem !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}

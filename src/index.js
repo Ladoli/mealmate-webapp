@@ -6,6 +6,7 @@ import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 import './index.css';
 import App from './App';
+import './CSS/mealmate.css';
 
 
 
