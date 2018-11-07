@@ -25,7 +25,7 @@ class RestoData extends Component {
     this.renderContent = this.renderContent.bind(this);
     this.goToGoogleMaps = this.goToGoogleMaps.bind(this);
     this.addToFavourites = this.addToFavourites.bind(this);
-    this.addToBlockList = this.addToBlockList.bind(this);
+    // this.addToBlockList = this.addToBlockList.bind(this);
   }
 
   addToFavourites(){
@@ -33,14 +33,6 @@ class RestoData extends Component {
     swal({
       title: "Restaurant has been saved!",
       text: "You can now access this restaurant anytime from the menu on the left!"
-    });
-  }
-
-  addToBlockList(){
-    this.props.addToUserBlockList(this.props.auth.uid, this.props.restoData.id);
-    swal({
-      title: "This restaurant has been blocked!",
-      text: "This restaurant has been removed from your list. It will not appear in future sessions!"
     });
   }
 
@@ -67,14 +59,8 @@ class RestoData extends Component {
       let middlePoint = {Lat: (destination.Lat + currentLocation.Lat)/2, Long: (destination.Long + currentLocation.Long)/2};
       let directionParams = currentLocation.Lat+",+"+currentLocation.Long+"/"+destination.Lat+",+"+destination.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
       let link = "https://www.google.ca/maps/dir/"+directionParams;
-      let userData = that.props.userData;
-      let favourites = null;
+      let { favourites } = that.props.userData;
       let restoID = that.props.restoData.id;
-      let blocklist = null;
-      if(userData){
-        favourites = that.props.userData.favourites;
-        blocklist = that.props.userData.blocklist
-      }
       return (
         <div style={{width: "270px", height: "270px", textAlign: "center"}} className="flexCenterAll">
             <Card>
@@ -92,15 +78,6 @@ class RestoData extends Component {
                   </Card.Content>
                 )
               }
-              {
-               (!blocklist || (blocklist && !blocklist[restoID]))  && (
-                   <Card.Content>
-                     <Button color='red' onClick={()=>this.addToBlockList()}>
-                       <Icon name='thumbs down' />BLOCKLIST
-                     </Button>
-                   </Card.Content>
-                 )
-               }
             </Card>
         </div>
       )

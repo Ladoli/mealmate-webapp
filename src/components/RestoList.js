@@ -4,6 +4,7 @@ import RestoContainer from './RestoContainer';
 import RestoData from './RestoData';
 import { Card, Button, Icon } from 'semantic-ui-react';
 import { connect } from "react-redux";
+import swal from 'sweetalert2';
 import * as actions from "../actions";
 
 
@@ -18,6 +19,7 @@ class RestoList extends Component {
     this.clickYes = this.clickYes.bind(this);
     this.clickNo = this.clickNo.bind(this);
     this.resetRestos = this.resetRestos.bind(this);
+    this.addToBlockList = this.addToBlockList.bind(this);
     let restoList = [];
     if(this.props.firebase_restoList){
       restoList = this.props.firebase_restoList;
@@ -153,6 +155,34 @@ class RestoList extends Component {
     });
   }
 
+  addToBlockList(){
+    let { currentResto, filteredRestoList } = this.state;
+    let that = this;
+    if(!currentResto){
+      currentResto = filteredRestoList.length - 1;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "This will remove this restaurant from your list of shown restaurants until it is unblocked",
+      type: "warning",
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Block it!',
+      cancelButtonText: 'Cancel',
+      cancelButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.value) {
+        that.props.addToUserBlockList(this.props.auth.uid, filteredRestoList[currentResto].id);
+        swal({
+          title: "This restaurant has been blocked!",
+          text: "This restaurant has been removed from your list. It will not appear in future sessions!"
+        });
+      }
+    })
+
+  }
+
   resetRestos(){
     let resetNumber = this.state.filteredRestoList.length - 1;
     this.setState({
@@ -163,6 +193,9 @@ class RestoList extends Component {
 
 
   render() {
+    if(!this.props.userData){
+      return <div>Loading</div>
+    }
     return (
       <div className="flexCenterAll restoBackground" style={{
         display: "flex", height: "100%", minHeight: "100vh"}}>
@@ -172,14 +205,26 @@ class RestoList extends Component {
           </Card.Content>
           <Card.Content extra style={{width: "100%", textAlign: "center"}}>
             <Button.Group fluid>
-              <Button onClick={this.clickNo}  className="circleButton" >
+              <Button 
+                onClick={this.clickNo}  
+                className="circleButton" >
                 <Icon name='x' color='red'/>
               </Button>
               {/* <Button.Or /> */}
-              <Button onClick={this.clickYes} className="circleButton" >
+              <Button 
+                onClick={this.clickYes} 
+                className="circleButton" >
                 <Icon name='check' color='green'/>
               </Button>
-              <Button onClick={this.resetRestos} className="circleButton">
+              <Button 
+                color='red' 
+                className="circleButton" 
+                onClick={()=>this.addToBlockList()}>
+                <Icon name='dont' color='red' />
+              </Button>
+              <Button 
+                onClick={this.resetRestos} 
+                className="circleButton">
                 <Icon name='redo' color='blue' />
               </Button>
             </Button.Group>
