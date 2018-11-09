@@ -11,6 +11,7 @@ class RestoContainer extends Component {
     super(props)
     this.state = {
       currentImage: 0,
+      initialPos: {x: 0, y: 0}
     }
     this.renderImages = this.renderImages.bind(this);
     this.calculateDistance = this.calculateDistance.bind(this);
@@ -144,9 +145,9 @@ class RestoContainer extends Component {
     let distance = this.calculateDistance(this.props.restoInfo.Location, this.props.currentLocation);
     return (
       <div style={{position: this.props.position}} className={this.props.cardClass}>
-        <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"} >
+        <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"} style={{paddingBottom: "4vh"}}>
           {this.renderImages()}
-          <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+          <div style={{textAlign: "center", fontSize: "4vh", lineHeight: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
               {this.props.name}
               <div style={{color: "rgb(150,150,150)", fontSize: "3vh", paddingTop: "10px", backgroundColor: "white"}}>
                   {distance + " km"}
