@@ -1,6 +1,6 @@
 import { authRef, provider, restoRef, databaseRef } from "../config/firebase";
 import { FETCH_USER, RIGHT_SWIPE, GET_RESTO, GET_RESTO_LIST, RESET_RESTO, GET_USER_DATA } from "./types";
-import { map } from 'lodash';
+import { map, shuffle } from 'lodash';
 import swal from 'sweetalert2';
 import history from '../components/History';
 
@@ -20,10 +20,7 @@ export const addToUserBlockList = (id,restoID,name) => dispatch => {
 export const removeUserBlockList = (id,restoID) => dispatch => {
   databaseRef.child('/Users/' + id + '/blocklist/'+restoID).remove();
   swal({
-    title: "Restaurant has been unblocked!",
-    text: "Reloading app. The restaurant will now show up again once the app reloads.",
-  }).then((res)=>{
-    window.location.reload();
+    title: "Restaurant has been unblocked!"  
   });
 };
 
@@ -32,8 +29,6 @@ export const resetUserBlockList = (id) => dispatch => {
   swal({
     title: "Blocklist has been reset!",
     text: "Reloading app. Formerly blocked restaurants will now show up again once the app reloads.",
-  }).then((res)=>{
-    window.location.reload();
   });
 };
 
@@ -70,13 +65,13 @@ export const resetRestoData = () => dispatch => {
 
 export const getRestoList = () => async dispatch => {
   restoRef.on("value", snapshot =>{
-    let arrayConvert = map(snapshot.val(), (values,keys)=>{
+    let arrayConvert = (map(snapshot.val(), (values,keys)=>{
       return values;
-    });
+    }));
 
     dispatch({
           type: GET_RESTO_LIST,
-          payload: arrayConvert
+          payload: shuffle(arrayConvert)
       });
   });
 };

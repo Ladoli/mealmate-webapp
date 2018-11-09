@@ -11,7 +11,6 @@ class RestoContainer extends Component {
     super(props)
     this.state = {
       currentImage: 0,
-      currentImageLink: this.props.images[0]
     }
     this.renderImages = this.renderImages.bind(this);
     this.calculateDistance = this.calculateDistance.bind(this);
@@ -20,7 +19,6 @@ class RestoContainer extends Component {
     this.renderArrows = this.renderArrows.bind(this);
 
   }
-
 
   calculateDistance(location1, location2){
     const R = 6371e3; // value for meters
@@ -98,16 +96,14 @@ class RestoContainer extends Component {
   }
 
   renderArrows(){
-    let image = this.state.currentImageLink;
-
-    if(!this.state.currentImageLink){
+    if(!this.state.currentImage && !this.props.images[this.state.currentImage]){
       return ( <div></div> )
     }
 
     if(this.props.images.length > 1){
       return (
         <div style={{cursor: "pointer", display: "inline-block",overflow: "hidden", position: "relative"}}>
-          <Image onClick={this.nextImage} centered={true} rounded={true} className="imagePics" src={image} />
+          <Image onClick={this.nextImage} centered={true} rounded={true} className="imagePics" src={this.props.images[this.state.currentImage]} />
           <div onClick={this.prevImage} className="foodImageArrows">
             <div className="flexCenterAll" style={{height: "100%", color: "white", fontSize: "38px", paddingTop: "10px", paddingLeft: "5px"}}>
               <div className="sliderArrows sliderPrev"></div>
@@ -123,7 +119,7 @@ class RestoContainer extends Component {
     }else{
       return (
         <div style={{display: "inline-block",overflow: "hidden", position: "relative"}}>
-          <Image centered={true} rounded={true} className="imagePics" src={image} />
+          <Image centered={true} rounded={true} className="imagePics" src={this.props.images[this.state.currentImage]} />
         </div>
       )
     }
@@ -139,14 +135,6 @@ class RestoContainer extends Component {
           </div>
         </Card.Content>
       )
-      // let imagesMap = map(images, (value,key)=>{
-      //
-      // });
-      // return (
-      //   <div className="flexCenterAll">
-      //     {imagesMap}
-      //   </div>
-      // )
     }else{
       return <div></div>
     }
@@ -154,21 +142,19 @@ class RestoContainer extends Component {
 
   render() {
     let distance = this.calculateDistance(this.props.restoInfo.Location, this.props.currentLocation);
-
-      return (
-        <div style={{position: this.props.position}} className={this.props.cardClass}>
-          <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"} >
-            {this.renderImages()}
-            <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
-                {this.props.name}
-                <div style={{color: "rgb(150,150,150)", fontSize: "3vh", paddingTop: "10px", backgroundColor: "white"}}>
-                    {distance + " km"}
-                </div>
-            </div>
-          </Card>
-        </div>
-      );
-    // }
+    return (
+      <div style={{position: this.props.position}} className={this.props.cardClass}>
+        <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"} >
+          {this.renderImages()}
+          <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+              {this.props.name}
+              <div style={{color: "rgb(150,150,150)", fontSize: "3vh", paddingTop: "10px", backgroundColor: "white"}}>
+                  {distance + " km"}
+              </div>
+          </div>
+        </Card>
+      </div>
+    );
   }
 }
 
