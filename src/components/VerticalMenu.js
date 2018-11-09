@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite, removeUserBlockList } from "../actions";
+import { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite, removeUserBlockList, signOut } from "../actions";
 import { Button, List, Header, Icon, Segment } from 'semantic-ui-react';
 import { map } from 'lodash';
 import Menu from 'react-burger-menu/lib/menus/push';
@@ -56,7 +56,8 @@ class VerticalMenu extends Component {
     let blockListText = this.state.showBlocklist ? "Hide" : "Show";
     return (
       <Menu width={ 200 } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-        { favourites && (
+        <Button primary fluid onClick={this.props.signOut}>Signout</Button>  
+      { favourites && (
             <List>
               <Header textAlign='center' attached="top" as='h3'>
                 <Icon name='star' color='yellow'/>
@@ -134,4 +135,4 @@ const mapStateToProps = ({ userData }) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite, removeUserBlockList } )(VerticalMenu);
+export default connect(mapStateToProps, { fetchUser, resetUserBlockList, getUserData, getRestoData, removeUserFavourite, removeUserBlockList, signOut } )(VerticalMenu);

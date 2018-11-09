@@ -2,6 +2,7 @@ import { authRef, provider, restoRef, databaseRef } from "../config/firebase";
 import { FETCH_USER, RIGHT_SWIPE, GET_RESTO, GET_RESTO_LIST, RESET_RESTO, GET_USER_DATA } from "./types";
 import { map } from 'lodash';
 import swal from 'sweetalert2';
+import history from '../components/History';
 
 
 export const addToUserFavourite = (id,restoID,name) => dispatch => {
@@ -110,7 +111,7 @@ export const signOut = () => dispatch => {
   authRef
     .signOut()
     .then(() => {
-      // Sign-out successful.
+      history.push("/");
     })
     .catch(error => {
       console.log(error);
