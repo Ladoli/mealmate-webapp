@@ -56,34 +56,35 @@ class VerticalMenu extends Component {
     let blockListText = this.state.showBlocklist ? "Hide" : "Show";
     return (
       <Menu width={ 200 } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-        <Button primary fluid onClick={this.props.signOut}>Signout</Button>  
-      { favourites && (
-            <List>
-              <Header textAlign='center' attached="top" as='h3'>
-                <Icon name='star' color='yellow'/>
-              </Header>
-              <Button.Group fluid vertical>
-                {
-                  map(favourites, (value,key) =>{
-                    return (
-                      <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
-                        <Button primary 
-                          className="userSpecOption flexCenterAll"
-                          onClick={()=>this.getSelectedRestoData(key)}>
-                          {value}
-                        </Button>
-                        <Button compact
-                          color='red' 
-                          icon='trash alternate'  
-                          className="deleteMenuButton"
-                          onClick={()=>this.removeFavourite(key)}/>
-                      </Segment>
-                    )
-                  })
-                }
-                </Button.Group>
-            </List>
-          )
+        <Button primary fluid onClick={this.props.signOut}>Signout</Button>
+        <br/>  
+        { favourites && (
+              <List>
+                <Header textAlign='center' attached="top" as='h3'>
+                  <Icon name='star' color='yellow'/>
+                </Header>
+                <Button.Group fluid vertical>
+                  {
+                    map(favourites, (value,key) =>{
+                      return (
+                        <Segment className="noPadding flexCenterAll" style={{margin: "0px"}} key={key}>
+                          <Button primary 
+                            className="userSpecOption flexCenterAll"
+                            onClick={()=>this.getSelectedRestoData(key)}>
+                            {value}
+                          </Button>
+                          <Button compact
+                            color='red' 
+                            icon='trash alternate'  
+                            className="deleteMenuButton"
+                            onClick={()=>this.removeFavourite(key)}/>
+                        </Segment>
+                      )
+                    })
+                  }
+                  </Button.Group>
+              </List>
+            )
         }
         { blocklist && (
           <Button fluid 
@@ -123,7 +124,7 @@ class VerticalMenu extends Component {
             style={{marginTop: '1em'}} 
             onClick={this.resetBlockHander}>
             Reset Blocklist
-          </Button>
+        </Button>
       </Menu>
     )
   }
