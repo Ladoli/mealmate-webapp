@@ -1,9 +1,10 @@
 .restoDisplay{
   min-height: 80vh !important;
-  width: 40vw !important;
+  width: 270px !important;
   position: absolute !important;
   margin: 0 !important;
-  min-width: 270px;
+  min-width: 270px !important;
+  max-width: 270px !important;
   height: auto !important;
 }
 
@@ -14,7 +15,7 @@
 .restoDataInfo-NoInfo{
   animation: disappear .5s 1 forwards;
   height: 80vh !important;
-  width: 40vw !important;
+  width: 270px !important;
   min-width: 270px !important;
   pointer-events: none !important;
 }
@@ -36,7 +37,7 @@ body{
 }
 
 .cardTest{
-  min-width: 40vw !important;
+  min-width: 270px !important;
   min-height: 35vh !important;
 }
 
@@ -53,7 +54,7 @@ body{
 }
 
 .cardLeft{
-  min-width: 40vw !important;
+  min-width: 270px !important;
   min-height: 35vh !important;
   animation: slideLeft 2.2s 1 forwards;
 }
@@ -64,10 +65,10 @@ body{
 
 .circleButton{
   /* border-radius: 50% !important; */
-  height: 7vh !important;
-  width: 7vh !important;
+  height: 40px !important;
+  width: 40px !important;
   padding: 0px !important;
-  font-size: 7vh !important;
+  font-size: 40px !important;
   background-color: transparent !important;
   margin: 0px !important;
   text-align: center !important;
@@ -78,8 +79,8 @@ body{
 }
 
 .restoDataMenuTab{
-  margin-left: 3vw !important;
-  margin-right: 3vw !important;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
   opacity: .8 !important;
   transform: scale(1,1);
 }
@@ -173,6 +174,10 @@ i {
   -webkit-animation: fadeInOut 2s infinite; /* Safari */
 }
 
+.displayContent{
+  height: calc(100vh - 20px);
+}
+
 @-webkit-keyframes fadeInOut {
   0% { opacity: .1}
   60% { opacity: .5}
@@ -223,13 +228,18 @@ React Burger CSS Below
 
 */
 
+.menuContainer{
+  height: 30px;
+  width: 100vw;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 25px;
-  top: 18px;
+  width: 30px;
+  height: 25px;
+  left: 10px;
+  top: 10px;
 }
 
 /* Color/shape of burger icon bars */
@@ -290,7 +300,8 @@ React Burger CSS Below
   }
 
   .restoDataContent{
-    width: 100% !important;
+    width: 270px !important;
+    max-width: 270px !important;
     text-align: center;
   }
 
@@ -303,7 +314,7 @@ React Burger CSS Below
 
 @media (max-height: 568px) {
   .restoDisplay{
-    min-height: 450px !important;
+    min-height: 430px !important;
   }
 }
 

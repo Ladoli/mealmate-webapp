@@ -96,7 +96,7 @@ class RestoList extends Component {
 
     if (!isEmpty(restos)) {
       return (
-        <div className="restoImagesCont" style={{display: "block", minHeight: "35vh", position: "relative", minWidth: "40vw"}}>
+        <div className="restoImagesCont" style={{display: "block", minHeight: "35vh", position: "relative", minWidth: "270px"}}>
           <div style={{position: "absolute"}} className="cardTest fadeIn">
             <Card fluid={true} centered={true} className="cardTest fadeIn shadowLess" >
               <Card.Content fluid="true" centered="true" className="noSidePadding flexCenterAll">
@@ -207,13 +207,12 @@ class RestoList extends Component {
       </div>
     }
     return (
-      <div className="flexCenterAll restoBackground" style={{
-        display: "flex", height: "100%", minHeight: "100vh"}}>
+      <div className="flexCenterAll displayContent">
         <Card fluid className="flexCenterAll restoDisplay">
-          <Card.Content className="noSidePadding">
+          <Card.Content className="noSidePadding" style={{width: "270px", paddingTop: "0px", paddingBottom: "0px"}}>
             {this.renderRestos()}
           </Card.Content>
-          <Card.Content extra style={{width: "100%", textAlign: "center"}}>
+          <Card.Content extra style={{paddingTop: "0px",width: "100%", textAlign: "center"}}>
             <Button.Group fluid>
               <Button 
                 onClick={this.clickNo}  

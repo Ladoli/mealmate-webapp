@@ -125,9 +125,9 @@ class RestoData extends Component {
       );
     }
       return (
-        <Card fluid className="flexCenterAll restoDisplay restoDataInfo">
-          <Card.Header className="restoDataContent">
-              <div style={{textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+        <Card className="flexCenterAll restoDisplay restoDataInfo">
+          <Card.Header className="restoDataContent" style={{textAlign: "center"}}>
+              <div style={{display: "inline-block", maxWidth: "270px", textAlign: "center", fontSize: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
                 {this.props.restoData.Name}
               </div>
               <Button.Group size='large' className="restoDataContent">
@@ -145,7 +145,7 @@ class RestoData extends Component {
           <Card.Content className="restoDataContent">
             {this.renderContent()}
           </Card.Content>
-          <Card.Content extra className="restoDataContent">
+          <Card.Content extra className="restoDataContent" style={{paddingBottom:"20px", paddingTop: "5px"}}>
             <Button onClick={this.swipeLeft}  className="circleButton">
               <Icon name='arrow circle left' color='red'/>
             </Button>

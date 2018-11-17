@@ -130,8 +130,8 @@ class RestoContainer extends Component {
 
     if(!isEmpty(this.props.images)){
       return(
-        <Card.Content fluid="true" centered="true" className="noSidePadding">
-          <div style={{textAlign: "center", overflow: "hidden"}}>
+        <Card.Content fluid="true" centered="true" className="noSidePadding" style={{paddingTop: "0px"}}>
+          <div style={{textAlign: "center", overflow: "hidden", maxWidth: "270px"}}>
             {this.renderArrows()}
           </div>
         </Card.Content>
@@ -145,7 +145,7 @@ class RestoContainer extends Component {
     let distance = this.calculateDistance(this.props.restoInfo.Location, this.props.currentLocation);
     return (
       <div style={{position: this.props.position}} className={this.props.cardClass}>
-        <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"} style={{paddingBottom: "4vh"}}>
+        <Card fluid={true} centered={true} className={this.props.cardClass + " shadowLess"}>
           {this.renderImages()}
           <div style={{textAlign: "center", fontSize: "4vh", lineHeight: "4vh", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
               {this.props.name}

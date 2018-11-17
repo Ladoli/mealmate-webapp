@@ -20,14 +20,16 @@ class App extends Component {
   render() {
     let VerticalMenuWithProps = (props) => {
       return (
+        <div className="menuContainer">
         <VerticalMenu
           auth={this.props.auth}
           {...props}
         />
+        </div>
       );
     }
     return (
-      <div className="restoBackground" id="outer-container">
+      <div id="outer-container">
         <Router history={history}>
           <div>
             <Route path={process.env.PUBLIC_URL+"/"} component={VerticalMenuWithProps} />
