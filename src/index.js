@@ -11,7 +11,7 @@ import './CSS/mealmate.css';
 
 
 
-const store = createStore(reducers, {restoData: "initial", firebase_restoList: null}, applyMiddleware(reduxThunk));
+const store = createStore(reducers, {restoData: null, firebase_restoList: null}, applyMiddleware(reduxThunk));
 
 
 ReactDOM.render(

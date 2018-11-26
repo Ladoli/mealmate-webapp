@@ -15,6 +15,13 @@ https://meal-mate-ladoli.netlify.com/
 * Semantic UI React
 * The ever lovable Lodash
 
+## Todo-List/In-progress
+* Folder Structure Rework
+* UI Rework
+* Group/Rooms
+* Delivery
+* Reviews
+
 ## Acknowledgments:
 https://github.com/harmanparihar/mealsters
 

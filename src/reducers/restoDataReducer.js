@@ -5,9 +5,9 @@ export default (state = null, action) => {
     case RIGHT_SWIPE:
       return action.payload || null;
     case GET_RESTO:
-      return action.payload || "initial";
+      return action.payload || null;
     case RESET_RESTO:
-      return "initial";
+      return null;
     default:
       return state;
   }

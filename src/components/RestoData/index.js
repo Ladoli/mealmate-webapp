@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react';
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import { fetchUser, getUserData, resetRestoData, setRestoData } from "../../actions";
 import { MdStore, MdRestaurantMenu, MdLocationOn } from 'react-icons/md';
-import swal from "sweetalert2";
+
+import Tabs from './Tabs';
 
 
 
@@ -21,77 +22,38 @@ class RestoData extends Component {
       buttonLocation: ""
     };
     this.props.getUserData(this.props.auth.uid);
-    this.swipeLeft = this.swipeLeft.bind(this);
-    this.renderContent = this.renderContent.bind(this);
-    this.goToGoogleMaps = this.goToGoogleMaps.bind(this);
-    this.addToFavourites = this.addToFavourites.bind(this);
   }
 
-  addToFavourites(){
-    this.props.addToUserFavourite(this.props.auth.uid, this.props.restoData.id, this.props.restoData.Name);
-    swal({
-      title: "Restaurant has been saved!",
-      text: "You can now access this restaurant anytime from the menu on the left!"
-    });
-  }
-
-  goToGoogleMaps(link){
-    window.open(link, '_blank');
-  }addToBlockList
-
-  swipeLeft(){
+  backToRestoList = ()=> {
     this.props.resetRestoData();
   }
 
-  renderContent(){
+  renderContent = ()=> {
     let that = this;
     let type = this.state.contentType;
-    let menuImage = that.props.restoData.MenuImages;
+    let { StoreFront, MenuImages } = that.props.restoData;
     if(type === 3){
-      let currentLocation = that.props.currentLocation;
-      let destination = that.props.restoData.Location;
-      if(!currentLocation || !destination){
-        return <div>
-          Location Not Provided.
-        </div>;
-      }
-      let middlePoint = {Lat: (destination.Lat + currentLocation.Lat)/2, Long: (destination.Long + currentLocation.Long)/2};
-      let directionParams = currentLocation.Lat+",+"+currentLocation.Long+"/"+destination.Lat+",+"+destination.Long+"/@"+middlePoint.Lat+",+"+middlePoint.Long;
-      let link = "https://www.google.ca/maps/dir/"+directionParams;
-      let favourites = that.props.userData ? that.props.userData.favourites : null;
-      let restoID = that.props.restoData.id;
-      return (
-        <div style={{width: "270px", height: "270px", textAlign: "center"}} className="flexCenterAll">
-            <Card>
-              <Card.Content>
-                <Button primary onClick={()=>this.goToGoogleMaps(link)}>
-                  <MdLocationOn /> DIRECTIONS
-                </Button>
-              </Card.Content>
-             {
-              (!favourites || (favourites && !favourites[restoID])) && (
-                  <Card.Content>
-                    <Button color='yellow' onClick={()=>this.addToFavourites()}>
-                      <Icon name='star' /> FAVOURITE
-                    </Button>
-                  </Card.Content>
-                )
-              }
-            </Card>
-        </div>
-      )
+       return (
+        <Tabs 
+            type = {that.state.contentType}
+            currentLocation = {that.props.currentLocation} 
+            destination = {that.props.restoData.Location}
+            favourites = {that.props.userData ? that.props.userData.favourites : null}
+            restoData = {that.props.restoData}
+            />
+       )
     }else if(type === 2){
       return (
-        <Image className="imagePics" src={menuImage}/>
+        <Image className="imagePics" src={MenuImages}/>
       )
     }else{
       return (
-        <Image className="imagePics" src={this.props.restoData.StoreFront}/>
+        <Image className="imagePics" src={StoreFront}/>
       )
     }
   }
 
-  setContentType(contentType){
+  setContentType = (contentType) =>{
     let buttonStore = "";
     let buttonMenu = "";
     let buttonLocation = "";
@@ -112,13 +74,7 @@ class RestoData extends Component {
 
 
   render() {
-    if(this.props.restoData === "initial"){
-      return (
-        <div>
-        </div>
-      );
-    }
-    else if(!this.props.restoData){
+    if(!this.props.restoData){
       return (
         <Card className="restoDataInfo-NoInfo">
         </Card>
@@ -143,10 +99,12 @@ class RestoData extends Component {
             </Button.Group>
           </Card.Header>
           <Card.Content className="restoDataContent">
-            {this.renderContent()}
+            { 
+                this.renderContent()
+            }
           </Card.Content>
           <Card.Content extra className="restoDataContent" style={{paddingBottom:"20px", paddingTop: "5px"}}>
-            <Button onClick={this.swipeLeft}  className="circleButton">
+            <Button onClick={this.backToRestoList}  className="circleButton">
               <Icon name='arrow circle left' color='red'/>
             </Button>
           </Card.Content>
@@ -163,4 +121,4 @@ const mapStateToProps = ({ restoData, auth, userData }) => {
   };
 };
 
-export default connect(mapStateToProps, actions)(RestoData);
+export default connect(mapStateToProps, { fetchUser, getUserData, resetRestoData, setRestoData })(RestoData);
